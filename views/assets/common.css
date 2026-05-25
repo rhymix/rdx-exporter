@@ -141,6 +141,10 @@ body {
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
+.rdx-container button[disabled] {
+	background-color: var(--border-color);
+	cursor: not-allowed;
+}
 
 .options-container {
 	display: none;
@@ -150,6 +154,6 @@ body {
 	display: flex;
 }
 
-.options-container button {
+.options-container button:not([disabled]) {
 	background-color: #007bff;
 }

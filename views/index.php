@@ -29,7 +29,7 @@
 		<input type="text" id="xe1_install_path" name="install_path" value="<?php echo escape($cms_path); ?>" />
 		<label for="xe1_db_password">Database Password</label>
 		<input type="password" id="xe1_db_password" name="db_password" autocomplete="new-password" />
-		<button class="validate-button">Validate</button>
+		<button class="validate-button" data-waiting-text="Validating...">Validate</button>
 	</div>
 
 	<div class="credentials" data-for-cms="XE3">
@@ -41,7 +41,7 @@
 <div class="rdx-container options-container">
 	<div class="options"></div>
 	<div class="buttons">
-		<button class="export-button">Export</button>
+		<button class="export-button" data-waiting-text="Please wait...">Export</button>
 	</div>
 </div>
 

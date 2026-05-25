@@ -17,7 +17,8 @@
 			}
 		});
 		$('.rdx-container .credentials').on('click', '.validate-button', function() {
-			const button = $(this);
+			const button = $(this).prop('disabled', true);
+			button.data('originalText', button.text()).text(button.data('waitingText'));
 			const container = $(this).closest('.credentials');
 			const data = {
 				action: 'validate',
@@ -47,15 +48,19 @@
 					} else {
 						alert(data.message);
 					}
+					button.text(button.data('originalText')).prop('disabled', false);
 				},
 				error: function(xhr) {
 					alert(xhr.responseText);
+					button.text(button.data('originalText')).prop('disabled', false);
 				}
 			});
 		});
 
 		// Export CMS data
 		$('.options-container .buttons').on('click', '.export-button', function() {
+			const button = $(this).prop('disabled', true);
+			button.data('originalText', button.text()).text(button.data('waitingText'));
 			const data = {
 				action: 'export',
 				cms_type: $('#cms_type').val()
@@ -95,9 +100,11 @@
 					} else if (data.message) {
 						alert(data.message);
 					}
+					button.text(button.data('originalText')).prop('disabled', false);
 				},
 				error: function(xhr) {
 					alert(xhr.responseText);
+					button.text(button.data('originalText')).prop('disabled', false);
 				}
 			});
 		});
