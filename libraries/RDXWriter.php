@@ -10,12 +10,12 @@ class RDXWriter
 	/**
 	 * Filename of the archive.
 	 */
-	protected $_filename;
+	protected $_filename = '';
 
 	/**
 	 * The password for the archive, if any.
 	 */
-	protected $_password;
+	protected $_password = '';
 
 	/**
 	 * ZipArchive instance.
