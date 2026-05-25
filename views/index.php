@@ -45,7 +45,7 @@
 <div class="rdx-container options-container">
 	<div class="options"></div>
 	<div class="buttons">
-		<button class="export-button" data-waiting-text="<?php echo lang('please_wait'); ?>"><?php echo lang('export'); ?></button>
+		<button class="export-button" data-waiting-text="<?php echo lang('exporting'); ?>"><?php echo lang('export'); ?></button>
 	</div>
 </div>
 
