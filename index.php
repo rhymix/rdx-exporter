@@ -36,7 +36,7 @@ require 'common.php';
  */
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && empty($_GET))
 {
-	echo view('index', [], true);
+	echo view('index', ['current_lang' => $current_lang], true);
 	exit();
 }
 
