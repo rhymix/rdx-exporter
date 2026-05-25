@@ -11,6 +11,7 @@ class Document
 	public $lang_code;
 	public $title;
 	public $content;
+	public $slug;
 	public $tags = [];
 
 	// Counters
