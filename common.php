@@ -53,6 +53,24 @@ function auto_detect_cms()
 }
 
 /**
+ * Get the list of constants defined in a CMS's config file, without actually executing the file.
+ *
+ * @param string $filename
+ * @return array
+ */
+function get_constants_in_file($filename)
+{
+	$content = file_get_contents($filename);
+	preg_match_all('/\bdefine\s*\(\s*[\'"]([^\'"]+)[\'"]\s*,\s*[\'"]([^\'"]*)[\'"]\s*\)/', $content, $matches, PREG_SET_ORDER);
+	$constants = [];
+	foreach ($matches as $match)
+	{
+		$constants[$match[1]] = $match[2];
+	}
+	return $constants;
+}
+
+/**
  * Asset loading function for views.
  *
  * @param string $path
