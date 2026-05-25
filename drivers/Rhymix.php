@@ -811,7 +811,7 @@ class Rhymix extends AbstractDriver
 
 				// Add the JSONL entry to the zip.
 				$board_title = isset($board_infos[$module_srl]) ? $board_infos[$module_srl]['name'] : "Board $module_srl";
-				$board_mid = $board_infos[$module_srl]['mid'] ?? $module_srl;
+				$board_mid = rawurlencode($board_infos[$module_srl]['mid'] ?? $module_srl);
 				$rdx->addEntry("boards/{$board_mid}_{$index}.jsonl", $tempname, 'board', $board_title, "{$range_start}-{$range_end}", true);
 				$index++;
 				$range_start = $range_end + 1;

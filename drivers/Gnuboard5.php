@@ -647,7 +647,8 @@ class Gnuboard5 extends AbstractDriver
 
 				// Add the JSONL entry to the zip.
 				$board_title = isset($board_infos[$board]) ? $board_infos[$board]['name'] : "Board $board";
-				$rdx->addEntry("boards/{$board}_{$index}.jsonl", $tempname, 'board', $board_title, "{$range_start}-{$range_end}", true);
+				$board_safe_name = rawurlencode($board);
+				$rdx->addEntry("boards/{$board_safe_name}_{$index}.jsonl", $tempname, 'board', $board_title, "{$range_start}-{$range_end}", true);
 				$index++;
 				$range_start = $range_end + 1;
 			}
