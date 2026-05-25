@@ -741,7 +741,7 @@ class Rhymix extends AbstractDriver
 								{
 									$info->extra_vars[$ev->eid] = @json_decode($ev->value, true) ?: [];
 								}
-								elseif (str_contains($ev->value, '|@|'))
+								elseif (strpos($ev->value, '|@|') !== false)
 								{
 									$info->extra_vars[$ev->eid] = explode('|@|', $ev->value);
 								}
