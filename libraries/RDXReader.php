@@ -22,9 +22,10 @@ class RDXReader
 	 * Open an RDX archive.
 	 *
 	 * @param string $path
+	 * @param string $password
 	 * @throws Exception
 	 */
-	public function __construct($path)
+	public function __construct($path, $password = '')
 	{
 		// Check if the file exists and is readable.
 		if (!file_exists($path) || !is_readable($path))
@@ -39,10 +40,28 @@ class RDXReader
 			throw new Exception('Failed to open RDX archive: ' . $path);
 		}
 
+		// If a password was provided, try it.
+		if ($password !== '')
+		{
+			if (!version_compare(\PHP_VERSION, '7.2.0', '>='))
+			{
+				throw new Exception('Password-protected archives require PHP 7.2 or higher.');
+			}
+			if (!defined('ZipArchive::EM_AES_128'))
+			{
+				throw new Exception('Password-protected archives require ZIP extension with AES support.');
+			}
+			if (!$this->_zip->setPassword($password))
+			{
+				throw new Exception('Failed to set ZIP password.');
+			}
+		}
+
+		// Load the index.json file from the archive.
 		$index_content = $this->_zip->getFromName('index.json');
 		if (!$index_content)
 		{
-			throw new Exception('index.json not found in RDX archive');
+			throw new Exception('Failed to read RDX archive. Is it password protected?');
 		}
 		$this->_index = json_decode($index_content, true);
 		if (!$this->_index)

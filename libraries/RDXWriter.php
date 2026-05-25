@@ -13,6 +13,11 @@ class RDXWriter
 	protected $_filename;
 
 	/**
+	 * The password for the archive, if any.
+	 */
+	protected $_password;
+
+	/**
 	 * ZipArchive instance.
 	 */
 	protected $_zip;
@@ -36,14 +41,33 @@ class RDXWriter
 	 * Open a zip file.
 	 *
 	 * @param string $path
+	 * @param string $password
 	 */
-	public function __construct($path)
+	public function __construct($path, $password = '')
 	{
 		$this->_filename = $path;
 		$this->_zip = new ZipArchive();
 		if ($this->_zip->open($this->_filename, ZipArchive::CREATE) !== true)
 		{
 			throw new Exception('Failed to create ZIP file: ' . $this->_filename);
+		}
+
+		// If a password was provided, check if ZIP encryption is supported.
+		if ($password !== '')
+		{
+			if (!version_compare(\PHP_VERSION, '7.2.0', '>='))
+			{
+				throw new Exception('Password-protected archives require PHP 7.2 or higher.');
+			}
+			if (!defined('ZipArchive::EM_AES_128'))
+			{
+				throw new Exception('Password-protected archives require ZIP extension with AES support.');
+			}
+			if (!$this->_zip->setPassword($password))
+			{
+				throw new Exception('Failed to set ZIP password.');
+			}
+			$this->_password = $password;
 		}
 	}
 
@@ -112,6 +136,13 @@ class RDXWriter
 		{
 			throw new Exception('Failed to add file to ZIP: ' . $filename);
 		}
+		if ($this->_password !== '')
+		{
+			if (!$this->_zip->setEncryptionName($filename, ZipArchive::EM_AES_128))
+			{
+				throw new Exception('Failed to encrypt file in ZIP: ' . $filename);
+			}
+		}
 
 		return true;
 	}
@@ -128,6 +159,13 @@ class RDXWriter
 		if (!$this->_zip->addFromString($filename, $content))
 		{
 			throw new Exception('Failed to add string to ZIP: ' . $filename);
+		}
+		if ($this->_password !== '')
+		{
+			if (!$this->_zip->setEncryptionName($filename, ZipArchive::EM_AES_128))
+			{
+				throw new Exception('Failed to encrypt file in ZIP: ' . $filename);
+			}
 		}
 
 		return true;
