@@ -29,7 +29,7 @@
 /**
  * Load common libraries.
  */
-require 'common.php';
+require 'libraries/Common.php';
 
 /**
  * Display the index view.
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && empty($_GET))
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'validate')
 {
 	$cms_type = preg_replace('/[^a-z0-9_]/i', '', $_POST['cms_type'] ?? '');
-	if (!$cms_type || !file_exists(__DIR__ . "/drivers/{$cms_type}.php"))
+	if (!$cms_type || !file_exists(RDX_EXPORTER_PATH . "/drivers/{$cms_type}.php"))
 	{
 		echo json_encode([
 			'success' => false,
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'export')
 {
 	$cms_type = preg_replace('/[^a-z0-9_]/i', '', $_POST['cms_type'] ?? '');
-	if (!$cms_type || !file_exists(__DIR__ . "/drivers/{$cms_type}.php"))
+	if (!$cms_type || !file_exists(RDX_EXPORTER_PATH . "/drivers/{$cms_type}.php"))
 	{
 		echo json_encode([
 			'success' => false,

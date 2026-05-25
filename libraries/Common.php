@@ -3,7 +3,7 @@
 /**
  * Define a constant to prevent direct access to views.
  */
-define('RDX_EXPORTER_PATH', __DIR__);
+define('RDX_EXPORTER_PATH', dirname(__DIR__));
 
 /**
  * Set the language.
@@ -27,7 +27,7 @@ spl_autoload_register(function ($class) {
 		return;
 	}
 	$relative_class = substr($class, strlen($prefix));
-	$file = __DIR__ . '/' . lcfirst(str_replace('\\', '/', $relative_class)) . '.php';
+	$file = RDX_EXPORTER_PATH . '/' . lcfirst(str_replace('\\', '/', $relative_class)) . '.php';
 	if (file_exists($file))
 	{
 		require_once $file;
@@ -157,7 +157,7 @@ function lang($key)
 function view($view_name, $vars = [], $wrap_layout = false)
 {
 	$view_name = preg_replace('/[^a-z0-9_-]+/i', '', $view_name);
-	$view_file = __DIR__ . '/views/' . $view_name . '.php';
+	$view_file = RDX_EXPORTER_PATH . '/views/' . $view_name . '.php';
 	if (!file_exists($view_file))
 	{
 		throw new Exception('View file not found: ' . $view_name);
@@ -171,7 +171,7 @@ function view($view_name, $vars = [], $wrap_layout = false)
 	if ($wrap_layout)
 	{
 		ob_start();
-		include __DIR__ . '/views/layout.php';
+		include RDX_EXPORTER_PATH . '/views/layout.php';
 		return ob_get_clean();
 	}
 	else
