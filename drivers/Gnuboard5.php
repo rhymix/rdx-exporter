@@ -177,7 +177,7 @@ class Gnuboard5 extends AbstractDriver
 	}
 
 	/**
-	 * Get the configuration file from the specified path and check if it's a valid Rhymix or XE1 installation.
+	 * Get the configuration file from the specified path and check if it's a valid Gnuboard installation.
 	 *
 	 * @param array $vars
 	 * @return array
