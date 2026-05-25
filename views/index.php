@@ -24,7 +24,7 @@
 		</select>
 	</div>
 
-	<div class="credentials" data-for-cms="Rhymix XE1">
+	<div class="credentials" data-for-cms="Rhymix XE1 Gnuboard5 WordPress">
 		<label for="xe1_install_path">Installation Path</label>
 		<input type="text" id="xe1_install_path" name="install_path" value="<?php echo escape($cms_path); ?>" />
 		<label for="xe1_db_password">Database Password</label>
@@ -32,8 +32,8 @@
 		<button class="validate-button">Validate</button>
 	</div>
 
-	<div class="credentials" data-for-cms="XE3 Gnuboard5 WordPress">
-		미지원
+	<div class="credentials" data-for-cms="XE3">
+		Not Supported Yet.
 	</div>
 
 </div>
