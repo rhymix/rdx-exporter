@@ -117,7 +117,8 @@ class WordPress extends AbstractDriver
 
 		// Open the output file for writing.
 		$path = \RDX_EXPORTER_PATH . '/temp/' . 'rdx_export_' . time() . '.zip';
-		$rdx = new RDXWriter($path);
+		$password = trim($vars['zip_password'] ?? '');
+		$rdx = new RDXWriter($path, $password);
 		$rdx->setSource('WordPress');
 		$rdx->setTimezone('Asia/Seoul');
 

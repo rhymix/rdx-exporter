@@ -143,7 +143,8 @@ class Rhymix extends AbstractDriver
 
 		// Open the output file for writing.
 		$path = \RDX_EXPORTER_PATH . '/temp/' . 'rdx_export_' . time() . '.zip';
-		$rdx = new RDXWriter($path);
+		$password = trim($vars['zip_password'] ?? '');
+		$rdx = new RDXWriter($path, $password);
 		$rdx->setSource($this instanceof XE1 ? 'XE1' : 'Rhymix');
 		$rdx->setTimezone('Asia/Seoul');
 

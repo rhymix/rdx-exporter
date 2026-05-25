@@ -12,3 +12,9 @@
 <p class="rdx-note">
 	<?php echo lang('include_attachments_desc'); ?>
 </p>
+
+<label><?php echo lang('zip_password'); ?></label>
+<input type="password" id="zip_password" name="zip_password" autocomplete="new-password" />
+<p class="rdx-note">
+	<?php echo lang('zip_password_desc'); ?>
+</p>
