@@ -384,7 +384,7 @@ class Rhymix extends AbstractDriver
 			}
 
 			// Open a temporary file for this batch.
-			$tempname = tempnam(\RDX_EXPORTER_PATH . '/temp', 'rdx_member_') . '.jsonl';
+			$tempname = tempnam(\RDX_EXPORTER_PATH . '/temp', 'rdx_member_');
 			$fp = fopen($tempname, 'wb');
 
 			// Convert each row to a Member instance and write as a JSON line.
@@ -534,7 +534,7 @@ class Rhymix extends AbstractDriver
 			}
 
 			// Open a temporary file for this batch.
-			$tempname = tempnam(\RDX_EXPORTER_PATH . '/temp', 'rdx_message_') . '.jsonl';
+			$tempname = tempnam(\RDX_EXPORTER_PATH . '/temp', 'rdx_message_');
 			$fp = fopen($tempname, 'wb');
 
 			// Convert each row to a Message instance and write as a JSON line.
@@ -671,7 +671,7 @@ class Rhymix extends AbstractDriver
 				}
 
 				// Open a temporary file for this batch.
-				$tempname = tempnam(\RDX_EXPORTER_PATH . '/temp', 'rdx_document_') . '.jsonl';
+				$tempname = tempnam(\RDX_EXPORTER_PATH . '/temp', 'rdx_document_');
 				$fp = fopen($tempname, 'wb');
 
 				// Convert each row to a Document instance and write as a JSON line.

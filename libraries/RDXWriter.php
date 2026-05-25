@@ -188,7 +188,10 @@ class RDXWriter
 
 		foreach ($this->_delete_sources as $source)
 		{
-			@unlink($source);
+			if (file_exists($source))
+			{
+				unlink($source);
+			}
 		}
 
 		return true;
