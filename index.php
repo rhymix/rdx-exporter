@@ -146,8 +146,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
 	}
 
 	$fp = fopen($path, 'rb');
-	while (($buffer = fread($fp, 8192)) !== false)
+	while (true)
 	{
+		$buffer = fread($fp, 8192);
+		if ($buffer === false || strlen($buffer) === 0)
+		{
+			break;
+		}
 		echo $buffer;
 		flush();
 	}

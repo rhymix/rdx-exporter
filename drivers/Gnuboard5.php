@@ -172,7 +172,7 @@ class Gnuboard5 extends AbstractDriver
 		// Return the download URL for the generated file.
 		return [
 			'success' => true,
-			'download_url' => './temp/' . basename($path),
+			'download_url' => './index.php?action=download&file=' . basename($path),
 		];
 	}
 
