@@ -45,6 +45,12 @@ class RDXWriter
 	 */
 	public function __construct($path, $password = '')
 	{
+		$dir = dirname($path);
+		if (!file_exists($dir) && !mkdir($dir, 0755, true))
+		{
+			throw new Exception('Failed to create directory: ' . $dir);
+		}
+
 		$this->_filename = $path;
 		$this->_zip = new ZipArchive();
 		if ($this->_zip->open($this->_filename, ZipArchive::CREATE) !== true)
