@@ -432,6 +432,17 @@ class Rhymix extends AbstractDriver
 					}
 				}
 
+				// Signature
+				$sig_filename = sprintf('files/member_extra_info/signature/%s%d.signature.php', $this->_getNumberingPath($row->member_srl), $row->member_srl);
+				if (file_exists($this->install_path . '/' . $sig_filename) && is_readable($this->install_path . '/' . $sig_filename))
+				{
+					$signature = trim(preg_replace('/<\?.*\?>/', '', file_get_contents($this->install_path . '/' . $sig_filename)));
+					if ($signature !== '')
+					{
+						$info->signature = $signature;
+					}
+				}
+
 				// Extra vars
 				if (isset($row->extra_vars) && $row->extra_vars)
 				{

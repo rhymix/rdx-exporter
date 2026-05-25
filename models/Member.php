@@ -34,6 +34,7 @@ class Member
 	public $blog;
 	public $birthday;
 	public $profile_image;
+	public $signature;
 	public $allow_mailing = 'Y';
 	public $allow_message = 'Y';
 	public $extra_vars = [];
