@@ -1,0 +1,155 @@
+:root {
+	--container-width: 600px;
+	--background-color: #f4f4f4;
+	--panel-bg-color: #fff;
+	--border-color: #ccc;
+	--text-color: #000;
+	--secondary-color: #666;
+	--error-text-color: #c00;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+	:root {
+		--background-color: #181818;
+		--text-color: #eee;
+		--panel-bg-color: #282828;
+		--border-color: #666;
+		--secondary-color: #aaa;
+		--error-text-color: #f44;
+	}
+}
+
+body {
+	margin: 40px 0;
+	padding: 0;
+	font-family: sans-serif;
+	background-color: var(--background-color);
+}
+
+.rdx-header {
+	width: var(--container-width);
+	max-width: calc(100% - 40px);
+	margin: 0 auto 40px auto;
+	text-align: center;
+	line-height: 1.5;
+	color: var(--text-color);
+}
+
+.rdx-header h1 {
+	font-size: 24px;
+	margin: 0;
+}
+
+.rdx-error {
+	width: var(--container-width);
+	max-width: calc(100% - 40px);
+	margin: 0 auto 20px auto;
+	padding: 20px;
+	box-sizing: border-box;
+	background: var(--panel-bg-color);
+	color: var(--error-text-color);
+	border-radius: 16px;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+	font-size: 14px;
+	line-height: 1.5;
+}
+.rdx-error h2 {
+	font-size: 18px;
+	margin: 0 0 8px 0;
+}
+.rdx-error p {
+	font-size: 14px;
+	margin: 0;
+}
+
+.rdx-container {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: var(--container-width);
+	max-width: calc(100% - 40px);
+	margin: 0 auto 20px auto;
+	padding: 20px;
+	box-sizing: border-box;
+	background: var(--panel-bg-color);
+	color: var(--text-color);
+	border-radius: 16px;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.rdx-container label {
+	display: block;
+	margin-top: 16px;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+.rdx-container label:first-child {
+	margin-top: 0;
+}
+.rdx-container input[type="text"],
+.rdx-container input[type="password"],
+.rdx-container input[type="email"],
+.rdx-container select,
+.rdx-container textarea {
+	display: block;
+	width: 100%;
+	padding: 6px 8px;
+	background-color: transparent;
+	color: var(--text-color);
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-size: 14px;
+}
+
+.rdx-container .rdx-checkbox-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.rdx-container .rdx-checkbox-container label {
+	width: auto;
+	margin: 0 !important;
+	font-weight: normal;
+}
+
+.rdx-container .credentials {
+	display: none;
+}
+.rdx-container .credentials .validate-button {
+	margin-top: 16px;
+}
+
+.rdx-container .rdx-note {
+	font-size: 12px;
+	line-height: 1.8;
+	color: var(--secondary-color);
+	margin: 3px 0;
+}
+
+.rdx-container button {
+	width: 100%;
+	padding: 10px 0;
+	background-color: var(--secondary-color);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.options-container {
+	display: none;
+}
+
+.options-container.active {
+	display: flex;
+}
+
+.options-container button {
+	background-color: #007bff;
+}
