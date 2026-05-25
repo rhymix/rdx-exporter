@@ -212,7 +212,17 @@ class Rhymix extends AbstractDriver
 			return isset($db_info) ? get_object_vars($db_info) : $config;
 		}, $install_path . $config_file_path);
 
-		$config['success'] = true;
+		if (is_array($config))
+		{
+			$config['success'] = true;
+		}
+		else
+		{
+			$config = [
+				'success' => false,
+				'message' => 'Failed to load configuration file',
+			];
+		}
 		return $config;
 	}
 
