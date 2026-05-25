@@ -25,10 +25,10 @@ Rhymix에서 RDX를 들여오는 모듈은 2026년 여름에 공개할 예정입
 6. 내보내기하는 데 시간이 너무 오래 걸리거나 다운로드에 실패하는 경우, 내보내기 범위를 줄여서 다시 시도해 보세요. (TODO: 분할 다운로드 기능 지원 예정)
 7. 작업을 마친 후에는 타인의 접속을 막기 위해 RDX Exporter를 삭제하는 것을 권장합니다. 특히 `temp` 디렉토리에 매우 큰 용량의 임시 파일이 남아 있을 수 있습니다.
 
-RDX 형식
-----------
+RDX 아카이브 형식
+----------------
 
-RDX 형식은 `zip` 파일 안에 `index.json` 및 다수의 JSONL 파일,
+RDX 아카이브 `zip` 파일 안에 `index.json` 및 다수의 JSONL 파일,
 그리고 내보내기 옵션에 따라 각종 바이너리(이미지, 동영상, 문서파일 등의 첨부파일)을 포함할 수 있습니다.
 
 JSONL은 각 줄이 하나의 JSON 객체로 구성된 데이터 레코드들을 나열한 텍스트 파일로,
@@ -80,7 +80,7 @@ JSONL은 각 줄이 하나의 JSON 객체로 구성된 데이터 레코드들을
 | `tz` | 원본 CMS에서 사용된 시간대입니다. 들여오기할 때 타임스탬프를 변환하는 데 사용됩니다. |
 | `entries` | 아카이브에 포함된 JSONL 파일들의 목록입니다. 각 항목은 아래 테이블과 같은 속성을 가집니다. |
 
-| entries 하위 속성 | 설명 |
+| entries 속성 | 설명 |
 |------------------|------------------|
 | `filename` | 압축된 파일의 경로입니다. RDX 아카이브 내에서 고유해야 합니다. |
 | `type` | 데이터의 종류를 나타냅니다. 현재 지원하는 종류로는 `member`, `message`, `board`가 있습니다. |
@@ -99,7 +99,7 @@ PHP에서 `json_encode()` 함수를 기본값 그대로 사용하면 이 형식�
 
 JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 레코드만을 포함해야 합니다.
 
-| type | 설명 | 레코드의 타입 |
+| Type | Description | Class |
 |------|------------------|------------------|
 | member | 회원 정보 | Rhymix\DataExchange\Models\Member |
 | message | 쪽지 | Rhymix\DataExchange\Models\Message |
@@ -107,3 +107,185 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 각 레코드는 해당 모델 클래스에서 선언한 속성만을 포함해야 합니다.
 임의의 속성을 추가하거나, 속성을 누락할 경우 들여오기 시점에 오류가 발생할 수 있습니다.
+
+### Member
+
+| Name | Type | Description |
+|------|------|-------------|
+| `user_id` | string | 아이디 |
+| `password` | string | 암호화된 비밀번호 |
+| `user_name` | string | 이름 |
+| `nick_name` | string | 닉네임 |
+| `email_address` | string | 이메일 주소 |
+| `phone_number` | string | 전화번호 (숫자만) |
+| `phone_country` | string | 전화번호의 3자리 국가 코드 (예: KOR) |
+| `phone_type` | string | 전화번호 종류: `mobile`, `home`, `work` 등 |
+| `signup_date` | date | 가입일 |
+| `signup_ipaddress` | string | 가입 IP 주소 |
+| `last_login_date` | date | 마지막 로그인 일시 |
+| `last_login_ipaddress` | string | 마지막 로그인 IP 주소 |
+| `change_password_date` | date | 마지막 비밀번호 변경 일시 |
+| `denied_until_date` | date | 로그인이 제한된 경우, 제한 해제 일시 |
+| `is_admin` | string | 관리자 여부: `Y` 또는 `N` |
+| `admin_description` | string | 관리용 설명 (비공개) |
+| `status` | string | 상태: `APPROVED` 또는 `DENIED` |
+| `homepage` | string | 홈페이지 URL |
+| `blog` | string | 블로그 URL |
+| `birthday` | date | 생년월일 |
+| `profile_image` | string | 프로필 이미지 파일 (아래 참고) |
+| `signature` | string | 서명 또는 자기소개 (공개) |
+| `allow_mailing` | string | 메일 수신 허용 여부: `Y` 또는 `N` |
+| `allow_message` | string | 쪽지 수신 허용 여부: `Y` 또는 `N` |
+| `extra_vars` | array | 확장 변수 (key-value pair) |
+| `groups` | string[] | 소속 그룹명 |
+| `points` | int | 보유 포인트 |
+
+### Message
+
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | int | 메시지 ID (고유값) |
+| `title` | string | 제목 |
+| `content` | string | 내용 |
+| `sender_user_id` | string | 발신자의 아이디 |
+| `recipient_user_id` | string | 수신자의 아이디 |
+| `sent_date` | date | 발신 일시 |
+| `read_date` | date | 읽음 일시 (읽지 않은 경우 `NULL`) |
+| `ipaddress` | string | IP 주소 |
+| `folder` | string | 폴더: `Inbox` 또는 `Sent` |
+| `references` | int[] | 참조 (다른 메시지를 참고하는 경우, 해당 메시지(들)의 ID값을 담는다) |
+| `extra_vars` | array | 확장 변수 (key-value pair) |
+| `files` | File[] | 첨부파일 |
+
+### Document
+
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | int | 문서 ID (고유값) |
+| `parent_id` | int | 상위 문서 ID |
+| `category` | string | 카테고리명 |
+| `lang_code` | string | 언어 코드 (예: `ko`) |
+| `title` | string | 제목 |
+| `content` | string | 내용 |
+| `slug` | string | 슬러그 (블로그 등에서 짧은주소 생성에 사용) |
+| `tags` | string[] | 태그 목록 |
+| `read_count` | int | 조회 수 |
+| `upvote_count` | int | 추천 수 |
+| `downvote_count` | int | 비추천 수 |
+| `comment_count` | int | 댓글 수 |
+| `trackback_count` | int | 트랙백 수 |
+| `file_count` | int | 첨부파일 수 |
+| `regdate` | date | 등록일 |
+| `last_update` | date | 마지막 수정일 |
+| `ipaddress` | string | IP 주소 |
+| `user_id` | string | 작성자 아이디 |
+| `password` | string | 암호화된 비밀번호 (비회원 글인 경우) |
+| `user_name` | string | 작성자 이름 |
+| `nick_name` | string | 작성자 닉네임 |
+| `email_address` | string | 작성자 이메일 주소 (비회원 글인 경우) |
+| `homepage` | string | 작성자 홈페이지 URL (비회원 글인 경우) |
+| `allow_comment` | string | 댓글 허용 여부: `Y` 또는 `N` |
+| `allow_trackback` | string | 트랙백 허용 여부: `Y` 또는 `N` |
+| `notify_message` | string | 알림 메시지 여부: `Y` 또는 `N` |
+| `is_notice` | string | 공지 여부: `Y` 또는 `N` 또는 `A` |
+| `title_bold` | string | 제목 굵게 여부: `Y` 또는 `N` |
+| `title_color` | string | 제목 색상: `#RRGGBB` |
+| `status` | string | 상태: `PUBLIC` 또는 `SECRET` |
+| `extra_vars` | array | 확장 변수 (key-value pair) |
+| `comments` | Comment[] | 댓글 (`Comment` 모델 인스턴스의 목록) |
+| `files` | File[] | 첨부파일 (`File` 모델 인스턴스의 목록) |
+| `links` | string[] | 링크 (확장변수 외에 따로 추가한 경우에 한함) |
+
+### Comment
+
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | int | 댓글 ID (고유값) |
+| `parent_id` | int | 상위 댓글 ID |
+| `content` | string | 내용 |
+| `upvote_count` | int | 추천 수 |
+| `downvote_count` | int | 비추천 수 |
+| `comment_count` | int | 댓글 수 |
+| `trackback_count` | int | 트랙백 수 |
+| `file_count` | int | 첨부파일 수 |
+| `regdate` | date | 등록일 |
+| `last_update` | date | 마지막 수정일 |
+| `ipaddress` | string | IP 주소 |
+| `user_id` | string | 작성자 아이디 |
+| `password` | string | 암호화된 비밀번호 (비회원 글인 경우) |
+| `user_name` | string | 작성자 이름 |
+| `nick_name` | string | 작성자 닉네임 |
+| `email_address` | string | 작성자 이메일 주소 (비회원 글인 경우) |
+| `homepage` | string | 작성자 홈페이지 URL (비회원 글인 경우) |
+| `notify_message` | string | 알림 메시지 여부: `Y` 또는 `N` |
+| `status` | string | 상태: `PUBLIC` 또는 `SECRET` |
+| `extra_vars` | array | 확장 변수 (key-value pair) |
+| `files` | File[] | 첨부파일 (`File` 모델 인스턴스의 목록) |
+
+### File
+
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | int | 파일 ID (고유값) |
+| `filename` | string | 원본 파일명 (예: example.jpg) |
+| `path` | string | 실제 파일이 저장된 경로 (아래 참고) |
+| `url` | string | CMS 설치 경로를 기준으로 한 URL (아래 참고) |
+| `download_count` | int | 다운로드 수 |
+| `regdate` | date | 등록일 |
+| `ipaddress` | string | IP 주소 |
+| `file_size` | int | 파일 크기 |
+| `mime_type` | string | MIME 타입 |
+| `original_type` | string | 변환된 파일인 경우, 원본의 타입 |
+| `width` | int | 이미지 너비 (px) |
+| `height` | int | 이미지 높이 (px) |
+| `duration` | int | 동영상/오디오 길이 (초) |
+| `is_valid` | string | 유효 여부: `Y` 또는 `N` |
+| `is_cover_image` | string | 대표 이미지 여부: `Y` 또는 `N` |
+| `comment` | string | 관리용 설명 (비공개) |
+| `extra_vars` | array | 확장 변수 (key-value pair) |
+
+### 공통
+
+- 각 레코드의 ID는 하나의 RDX 아카이브 내에서 상호 참조를 위해 사용하는 값으로, 들여오기할 때 해당 ID가 그대로 유지된다는 보장은 없습니다.
+- `int` 타입의 속성에 값이 없는 경우에는 `0`을 넣습니다.
+- `string` 타입의 속성에 값이 없는 경우에는 `NULL`을 넣습니다.
+- `date`는 `YmdHis` 형식으로 14바이트여야 하며, 해당 형식에 맞는 데이터를 넣을 수 없는 경우 `NULL`을 넣습니다.
+- 확장변수는 key-value pair로 표현된 JSON 객체로, key는 문자열이어야 하며 value는 문자열, 숫자, 불리언, list 또는 `NULL`이 될 수 있습니다.
+  기본적으로 Rhymix에서 array로 취급하는 확장변수는 모두 list로 인코딩합니다.
+  nested object 또는 associative array를 value에 넣는 것은 허용하지 않습니다.
+
+### 첨부파일 처리 방법
+
+첨부파일은 필요에 따라 아래의 2가지 방법 중 하나를 사용하여 입력합니다.
+
+#### 아카이브에 포함
+
+첨부파일을 RDX 아카이브에 포함하면 해당 아카이브 파일 외에 추가적인 파일 관리가 필요하지 않으므로 가장 간편한 방법입니다.
+단, 첨부파일이 많은 경우 아카이브의 용량이 매우 커질 수 있고, 다운로드 및 들여오기 시점에 시간 초과 또는 용량 초과로 오류가 날 수 있습니다.
+
+아카이브에 포함된 파일의 `path` 속성은 아래와 같은 형식으로 아카이브 내의 파일 경로를 참조합니다.
+
+```
+"path":"rdx:files/attach/.../example.jpg",
+"url":"files/attach/.../example.jpg",
+```
+
+아카이브 내의 파일 경로는 임의로 정할 수 있으므로, `path`와 `url`이 서로 유사한 형식을 띨 필요는 없습니다.
+그러나 기본 제공되는 내보내기 드라이버들은 모두 편의상 원본 파일의 파일시스템 경로를 그대로 사용하도록 되어 있습니다.
+또한 `url`의 경우, 게시물 본문에 해당 이미지 경로를 삽입해 놓은 경우가 많으므로
+링크가 깨지는 것을 막기 위해 가능하면 원본의 디렉토리 구조를 그대로 유지할 것을 권장합니다.
+
+#### 파일시스템 경로 참조
+
+첨부파일을 RDX 아카이브에 포함하지 않고 파일시스템 경로를 참조하는 방법도 지원합니다.
+이렇게 하면 아카이브 파일의 용량과 다운로드/들여오기 시간을 줄일 수 있지만, 첨부파일이 포함된 디렉토리를 별도로 보관하고 업로드하여야 합니다.
+
+이 경우, `path` 속성은 아래와 같은 형식으로 **CMS 설치 디렉토리에 대하여 상대적인** 파일시스템 경로를 참조합니다.]
+
+```
+"path":"url:files/attach/.../example.jpg",
+"url":"files/attach/.../example.jpg",
+```
+
+절대경로나 실제 URL을 입력하지 않는 이유는, 서버 이전에 따른 경로 및 홈페이지 주소 변경에 유연하게 대응하기 위함입니다.
+이러한 상대경로를 기준으로 실제 경로를 다시 생성하는 것은 RDX 아카이브를 들여오기하는 프로그램의 몫입니다.
