@@ -507,7 +507,7 @@ class Rhymix extends AbstractDriver
 			"LEFT JOIN {$prefix}member AS m2 ON msg.receiver_srl = m2.member_srl " .
 			"WHERE msg.message_srl > ? ORDER BY msg.message_srl ASC LIMIT $batch");
 
-		// Loop through members in batches.
+		// Loop through messages in batches.
 		$index = 1;
 		$range_start = 1;
 		$range_end = 0;
