@@ -71,6 +71,24 @@ function get_constants_in_file($filename)
 }
 
 /**
+ * Get the list of simple global variables defined in a CMS's config file, without actually executing the file.
+ *
+ * @param string $filename
+ * @return array
+ */
+function get_global_vars_in_file($filename)
+{
+	$content = file_get_contents($filename);
+	preg_match_all('/\s\$([a-zA-Z0-9_]+)\s*=\s*[\'"]([^\'"]+)[\'"]\s*;/', $content, $matches, PREG_SET_ORDER);
+	$vars = [];
+	foreach ($matches as $match)
+	{
+		$vars[$match[1]] = $match[2];
+	}
+	return $vars;
+}
+
+/**
  * Asset loading function for views.
  *
  * @param string $path
