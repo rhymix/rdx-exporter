@@ -6,6 +6,7 @@ class Document
 {
 	// Basic information
 	public $id;
+	public $parent_id;
 	public $category;
 	public $lang_code;
 	public $title;
@@ -43,7 +44,8 @@ class Document
 	public $status = 'PUBLIC';
 	public $extra_vars = [];
 
-	// Comments and files
+	// Comments, files, and links
 	public $comments = [];
 	public $files = [];
+	public $links = [];
 }
