@@ -97,7 +97,7 @@ class RDXReader
 	 */
 	public function getTimezone()
 	{
-		return $this->_index['timezone'] ?? 'ETC/UTC';
+		return $this->_index['tz'] ?? 'ETC/UTC';
 	}
 
 	/**
