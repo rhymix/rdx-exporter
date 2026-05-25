@@ -6,7 +6,6 @@ class Comment
 {
 	// Basic information
 	public $id;
-	public $document_id;
 	public $parent_id;
 	public $content;
 

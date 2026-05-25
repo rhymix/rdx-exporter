@@ -688,7 +688,7 @@ class Rhymix extends AbstractDriver
 					// Counters
 					$info->read_count = intval($row->readed_count ?? 0);
 					$info->upvote_count = intval($row->voted_count ?? 0);
-					$info->downvote_count = intval($row->blamed_count ?? 0);
+					$info->downvote_count = abs(intval($row->blamed_count ?? 0));
 					$info->comment_count = intval($row->comment_count ?? 0);
 					$info->trackback_count = intval($row->trackback_count ?? 0);
 					$info->file_count = intval($row->uploaded_count ?? 0);
@@ -754,13 +754,12 @@ class Rhymix extends AbstractDriver
 						// Basic information
 						$comment_info = new CommentModel();
 						$comment_info->id = (int)$cmt->comment_srl;
-						$comment_info->document_id = (int)$cmt->document_srl;
 						$comment_info->parent_id = $cmt->parent_srl ? (int)$cmt->parent_srl : null;
 						$comment_info->content = $cmt->content;
 
 						// Counters
 						$comment_info->upvote_count = intval($cmt->voted_count ?? 0);
-						$comment_info->downvote_count = intval($cmt->blamed_count ?? 0);
+						$comment_info->downvote_count = abs(intval($cmt->blamed_count ?? 0));
 						$comment_info->file_count = intval($cmt->uploaded_count ?? 0);
 
 						// Dates and IP addresses
