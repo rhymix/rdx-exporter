@@ -65,10 +65,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 		exit();
 	}
 
-	$driver = new $driver_class();
-	$result = $driver->validate($_POST);
-	echo json_encode($result);
-	exit();
+	try
+	{
+		$driver = new $driver_class();
+		$result = $driver->validate($_POST);
+		echo json_encode($result);
+		exit();
+	}
+	catch (Exception $e)
+	{
+		echo json_encode([
+			'success' => false,
+			'message' => $e->getMessage(),
+		]);
+		exit();
+	}
 }
 
 /**
@@ -96,10 +107,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 		exit();
 	}
 
-	$driver = new $driver_class();
-	$result = $driver->export($_POST);
-	echo json_encode($result);
-	exit();
+	try
+	{
+		$driver = new $driver_class();
+		$result = $driver->export($_POST);
+		echo json_encode($result);
+		exit();
+	}
+	catch (Exception $e)
+	{
+		echo json_encode([
+			'success' => false,
+			'message' => $e->getMessage(),
+		]);
+		exit();
+	}
 }
 
 /**
