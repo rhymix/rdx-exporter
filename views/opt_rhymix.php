@@ -1,20 +1,20 @@
-<label>Export Type</label>
+<label><?php echo lang('export_types'); ?></label>
 <div class="rdx-checkbox-container">
-	<label><input type="checkbox" name="export_type[]" value="member" checked /> Member</label>
-	<label><input type="checkbox" name="export_type[]" value="message" checked /> Message</label>
-	<label><input type="checkbox" name="export_type[]" value="board" /> Board</label>
+	<label><input type="checkbox" name="export_type[]" value="member" checked /> <?php echo lang('export_type_member'); ?></label>
+	<label><input type="checkbox" name="export_type[]" value="message" checked /> <?php echo lang('export_type_message'); ?></label>
+	<label><input type="checkbox" name="export_type[]" value="board" /> <?php echo lang('export_type_board'); ?></label>
 </div>
 
-<label>Include Attachments</label>
+<label><?php echo lang('include_attachments'); ?></label>
 <div class="rdx-checkbox-container">
-	<label><input type="radio" name="include_attachments" value="Y" /> Yes</label>
-	<label><input type="radio" name="include_attachments" value="N" checked /> No</label>
+	<label><input type="radio" name="include_attachments" value="Y" /> <?php echo lang('yes'); ?></label>
+	<label><input type="radio" name="include_attachments" value="N" checked /> <?php echo lang('no'); ?></label>
 </div>
 <p class="rdx-note">
-	Including attachments may increase the export time and file size significantly.
+	<?php echo lang('include_attachments_desc'); ?>
 </p>
 
-<label>Select Boards</label>
+<label><?php echo lang('select_boards'); ?></label>
 <select name="module_srls" multiple>
 	<?php foreach ($boards as $board): ?>
 		<option value="<?php echo escape($board['module_srl']); ?>"><?php echo escape($board['name'], false); ?></option>

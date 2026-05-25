@@ -1,0 +1,27 @@
+<?php
+
+$lang = new stdClass();
+$lang->select_cms = 'CMS 선택';
+$lang->install_path = '설치 경로';
+$lang->db_password = 'DB 비밀번호';
+$lang->validate = '검증';
+$lang->export = '내보내기';
+$lang->validating = '검증 중...';
+$lang->exporting = '내보내는 중...';
+$lang->export_types = '내보낼 데이터 유형';
+$lang->export_type_member = '회원정보';
+$lang->export_type_message = '쪽지';
+$lang->export_type_board = '게시판';
+$lang->export_type_post = '게시물';
+$lang->include_attachments = '첨부파일 포함';
+$lang->include_attachments_desc = '첨부파일을 포함하여 내보내기하면 파일 크기와 소요 시간이 크게 증가할 수 있습니다. 가능하면 동일한 경로에 첨부파일을 직접 업로드하는 것을 권장합니다.';
+$lang->yes = '예';
+$lang->no = '아니오';
+$lang->select_boards = '게시판 선택';
+$lang->not_supported = '아직 지원하지 않습니다.';
+$lang->pdo_missing = 'PDO 확장 모듈이 없습니다.';
+$lang->pdo_missing_desc = 'RDX Exporter가 제대로 작동하려면 PDO 확장 모듈이 필요합니다.';
+$lang->zip_missing = 'Zip 확장 모듈이 없습니다.';
+$lang->zip_missing_desc = 'RDX Exporter가 제대로 작동하려면 Zip 확장 모듈이 필요합니다.';
+$lang->temp_dir_error = '임시 디렉토리를 생성할 수 없습니다.';
+$lang->temp_dir_error_desc = 'RDX Exporter 경로 안에 &quot;temp&quot; 디렉토리를 생성하고 권한을 777로 변경해 주세요.';

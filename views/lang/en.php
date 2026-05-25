@@ -1,0 +1,27 @@
+<?php
+
+$lang = new stdClass();
+$lang->select_cms = 'Select CMS';
+$lang->install_path = 'Installation Path';
+$lang->db_password = 'DB Password';
+$lang->validate = 'Validate';
+$lang->export = 'Export';
+$lang->validating = 'Validating...';
+$lang->exporting = 'Exporting...';
+$lang->export_types = 'Export Types';
+$lang->export_type_member = 'Members';
+$lang->export_type_message = 'Messages';
+$lang->export_type_board = 'Boards';
+$lang->export_type_post = 'Posts';
+$lang->include_attachments = 'Include Attachments';
+$lang->include_attachments_desc = 'Including attachments in the export may significantly increase file size and processing time. It is recommended to upload attachments directly to the same path if possible.';
+$lang->yes = 'Yes';
+$lang->no = 'No';
+$lang->select_boards = 'Select Boards';
+$lang->not_supported = 'Not supported yet.';
+$lang->pdo_missing = 'PDO extension is missing.';
+$lang->pdo_missing_desc = 'RDX Exporter requires the PDO extension to function properly.';
+$lang->zip_missing = 'Zip extension is missing.';
+$lang->zip_missing_desc = 'RDX Exporter requires the Zip extension to function properly.';
+$lang->temp_dir_error = 'Cannot create temporary directory.';
+$lang->temp_dir_error_desc = 'Please create a &quot;temp&quot; directory inside the RDX Exporter path and set its permissions to 777.';

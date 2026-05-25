@@ -29,7 +29,7 @@ body {
 .rdx-header {
 	width: var(--container-width);
 	max-width: calc(100% - 40px);
-	margin: 0 auto 40px auto;
+	margin: 0 auto 32px auto;
 	text-align: center;
 	line-height: 1.5;
 	color: var(--text-color);
@@ -38,6 +38,16 @@ body {
 .rdx-header h1 {
 	font-size: 24px;
 	margin: 0;
+}
+
+.rdx-header .rdx-lang {
+	margin: 16px 0 0 0;
+	font-size: 12px;
+	color: var(--secondary-color);
+}
+.rdx-header .rdx-lang a {
+	color: var(--secondary-color);
+	text-decoration: none;
 }
 
 .rdx-error {
@@ -125,9 +135,8 @@ body {
 
 .rdx-container .rdx-note {
 	font-size: 12px;
-	line-height: 1.8;
 	color: var(--secondary-color);
-	margin: 3px 0;
+	margin: 8px 0;
 }
 
 .rdx-container button {

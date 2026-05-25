@@ -6,6 +6,18 @@
 define('RDX_EXPORTER_PATH', __DIR__);
 
 /**
+ * Set the language.
+ */
+$current_lang = 'ko';
+if (isset($_COOKIE['rdx_lang']) && preg_match('/^[a-z]{2}$/', $_COOKIE['rdx_lang']))
+{
+	if (file_exists(RDX_EXPORTER_PATH . '/views/lang/' . $_COOKIE['rdx_lang'] . '.php'))
+	{
+		$current_lang = $_COOKIE['rdx_lang'];
+	}
+}
+
+/**
  * Register autoloader.
  */
 spl_autoload_register(function ($class) {
@@ -115,6 +127,23 @@ function asset($path)
 function escape($string, $double_encode = true)
 {
 	return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', $double_encode);
+}
+
+/**
+ * Lang function for views.
+ *
+ * @param string $key
+ * @return string
+ */
+function lang($key)
+{
+	global $current_lang;
+	static $lang = null;
+	if ($lang === null)
+	{
+		include RDX_EXPORTER_PATH . '/views/lang/' . ($current_lang ?? 'ko') . '.php';
+	}
+	return isset($lang->$key) ? $lang->$key : $key;
 }
 
 /**

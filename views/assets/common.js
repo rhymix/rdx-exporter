@@ -1,4 +1,11 @@
 (function($) {
+
+	// Lang change function
+	window.setLang = function(lang) {
+		document.cookie = 'rdx_lang=' + lang + '; path=/';
+		location.reload();
+	};
+
 	$(function() {
 
 		// CMS type selector
