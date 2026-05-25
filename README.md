@@ -290,3 +290,38 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 절대경로나 실제 URL을 입력하지 않는 이유는, 서버 이전에 따른 경로 및 홈페이지 주소 변경에 유연하게 대응하기 위함입니다.
 이러한 상대경로를 기준으로 실제 경로를 다시 생성하는 것은 RDX 아카이브를 들여오기하는 프로그램의 몫입니다.
+
+RDX Reader
+----------------
+
+첨부된 RDX Reader 클래스를 사용하여 RDX 아카이브에 포함된 회원 정보, 쪽지, 게시물 등을 추출할 수 있습니다.
+이것을 활용하여 다양한 CMS에서 RDX 아카이브를 들여오는 프로그램을 개발할 수 있습니다.
+
+```
+<?php
+
+include 'libraries/RDXReader.php';
+$reader = new Rhymix\DataExchange\Libraries\RDXReader('example.zip');
+foreach ($reader->getIndexEntries() as $entry)
+{
+    echo "Type: {$entry['type']}, Title: {$entry['title']}, Range: {$entry['range']}\n";
+}
+foreach ($reader->getMembers() as $member)
+{
+    echo "User ID: {$member->user_id}, Name: {$member->nick_name}\n";
+}
+foreach ($reader->getMessages() as $message)
+{
+    echo "Message ID: {$message->id}, Title: {$message->title}\n";
+}
+foreach ($reader->getDocuments('자유게시판', 0, 10) as $document)
+{
+    echo "Document ID: {$document->id}, Title: {$document->title}\n";
+}
+```
+
+회원 정보, 쪽지, 게시물을 읽어오는 메소드는 `Generator`를 반환하므로,
+많은 양의 데이터를 처리하더라도 `foreach` 루프를 사용하여 한 레코드씩 순차적으로 처리할 수 있습니다.
+
+게시물의 경우, `offset`과 `count` 매개변수를 사용하여 특정 범위의 게시물만 추출할 수도 있으나,
+순차적으로 읽어야 하는 JSONL 포맷의 특성상 효율적이지 않으니 참고하시기 바랍니다.
