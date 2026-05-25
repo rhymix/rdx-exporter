@@ -101,9 +101,9 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 | Type | Description | Class |
 |------|------------------|------------------|
-| member | 회원 정보 | Rhymix\DataExchange\Models\Member |
-| message | 쪽지 | Rhymix\DataExchange\Models\Message |
-| board | 게시물 | Rhymix\DataExchange\Models\Document |
+| `member` | 회원 정보 | Rhymix\DataExchange\Models\Member |
+| `message` | 쪽지 | Rhymix\DataExchange\Models\Message |
+| `board` | 게시물 | Rhymix\DataExchange\Models\Document |
 
 각 레코드는 해당 모델 클래스에서 선언한 속성만을 포함해야 합니다.
 임의의 속성을 추가하거나, 속성을 누락할 경우 들여오기 시점에 오류가 발생할 수 있습니다.
