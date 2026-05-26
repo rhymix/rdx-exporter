@@ -618,7 +618,7 @@ class Gnuboard5 implements DriverInterface
 						if ($cmt->wr_comment_reply)
 						{
 							$reply_key = ord($cmt->wr_comment_reply) - 1;
-							$comment_info->parent_id = $reply_map[$cmt->wr_parent . '/' . $cmt->wr_comment . '/' . $reply_key] ?? 0;
+							$comment_info->parent_id = $reply_map[$cmt->wr_parent . '/' . $cmt->wr_comment . '/' . $reply_key] ?? null;
 						}
 
 						// Counters
