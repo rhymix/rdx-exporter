@@ -110,35 +110,35 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 ### Member
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `user_id` | `string` | Y | 아이디 |
-| `password` | `string` | Y | 암호화된 비밀번호 |
-| `user_name` | `string` |  | 이름 |
-| `nick_name` | `string` | Y | 닉네임 |
-| `email_address` | `string` |  | 이메일 주소 |
-| `phone_number` | `string` |  | 전화번호 (숫자만) |
-| `phone_country` | `string` |  | 전화번호의 3자리 국가 코드 (예: KOR) |
-| `phone_type` | `string` |  | 전화번호 종류: `mobile`, `home`, `work` 등 |
-| `signup_date` | `date` | Y | 가입일 |
-| `signup_ipaddress` | `string` |  | 가입 IP 주소 |
-| `last_login_date` | `date` |  | 마지막 로그인 일시 |
-| `last_login_ipaddress` | `string` |  | 마지막 로그인 IP 주소 |
-| `change_password_date` | `date` |  | 마지막 비밀번호 변경 일시 |
-| `denied_until_date` | `date` |  | 로그인이 제한된 경우, 제한 해제 일시 |
-| `is_admin` | `string` |  | 관리자 여부: `Y` 또는 `N` |
-| `admin_description` | `string` |  | 관리용 설명 (비공개) |
-| `status` | `string` |  | 상태: `APPROVED` 또는 `DENIED` |
-| `homepage` | `string` |  | 홈페이지 URL |
-| `blog` | `string` |  | 블로그 URL |
-| `birthday` | `date` |  | 생년월일 |
-| `profile_image` | `string` |  | 프로필 이미지 파일 (아래 참고) |
-| `signature` | `string` |  | 서명 또는 자기소개 (공개) |
-| `allow_mailing` | `string` |  | 메일 수신 허용 여부: `Y` 또는 `N` |
-| `allow_message` | `string` |  | 쪽지 수신 허용 여부: `Y` 또는 `N` |
-| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
-| `groups` | `string[]` |  | 소속 그룹명 |
-| `points` | `int` |  | 보유 포인트 |
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `user_id` | `string` | 🗸 |  | 아이디 |
+| `password` | `string` | 🗸 |  | 암호화된 비밀번호 |
+| `user_name` | `string` |  |  | 이름 |
+| `nick_name` | `string` | 🗸 |  | 닉네임 |
+| `email_address` | `string` |  |  | 이메일 주소 |
+| `phone_number` | `string` |  |  | 전화번호 (숫자만) |
+| `phone_country` | `string` |  |  | 전화번호의 3자리 국가 코드 (예: KOR) |
+| `phone_type` | `string` |  |  | 전화번호 종류: `mobile`, `home`, `work` 등 |
+| `signup_date` | `date` | 🗸 |  | 가입일 |
+| `signup_ipaddress` | `string` |  |  | 가입 IP 주소 |
+| `last_login_date` | `date` |  |  | 마지막 로그인 일시 |
+| `last_login_ipaddress` | `string` |  |  | 마지막 로그인 IP 주소 |
+| `change_password_date` | `date` |  |  | 마지막 비밀번호 변경 일시 |
+| `denied_until_date` | `date` |  |  | 로그인이 제한된 경우, 제한 해제 일시 |
+| `is_admin` | `string` |  | `N` | 관리자 여부: `Y` 또는 `N` |
+| `admin_description` | `string` |  |  | 관리용 설명 (비공개) |
+| `status` | `string` |  | `APPROVED` | 상태: `APPROVED` 또는 `DENIED` |
+| `homepage` | `string` |  |  | 홈페이지 URL |
+| `blog` | `string` |  |  | 블로그 URL |
+| `birthday` | `date` |  |  | 생년월일 |
+| `profile_image` | `string` |  |  | 프로필 이미지 파일 (아래 참고) |
+| `signature` | `string` |  |  | 서명 또는 자기소개 (공개) |
+| `allow_mailing` | `string` |  | `Y` | 메일 수신 허용 여부: `Y` 또는 `N` |
+| `allow_message` | `string` |  | `Y` | 쪽지 수신 허용 여부: `Y` 또는 `N` |
+| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `groups` | `string[]` |  |  | 소속 그룹명 |
+| `points` | `int` |  | 0 | 보유 포인트 |
 
 - RDX 아카이브 내에서 회원을 참조할 때는 항상 `user_id`를 사용합니다.
   XE/Rhymix의 `member_srl`이나 각 테이블의 `auto_increment`와 같은 정수값은 데이터를 들여오는 사이트에서 그대로 유지된다는 보장이 없기 때문입니다.
@@ -151,20 +151,20 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 ### Message
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `id` | `int` | Y | 메시지 ID (고유값) |
-| `title` | `string` |  | 제목 |
-| `content` | `string` | Y | 내용 |
-| `sender_user_id` | `string` | Y | 발신자의 아이디 |
-| `recipient_user_id` | `string` | Y | 수신자의 아이디 |
-| `sent_date` | `date` | Y | 발신 일시 |
-| `read_date` | `date` |  | 읽음 일시 (읽지 않은 경우 `NULL`) |
-| `ipaddress` | `string` |  | IP 주소 |
-| `folder` | `string` | Y | 폴더: `Inbox` 또는 `Sent` |
-| `references` | `int[]` |  | 참조 (다른 메시지를 참고하는 경우, 해당 메시지(들)의 ID값을 담는다) |
-| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
-| `files` | `File[]` |  | 첨부파일 |
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `id` | `int` | 🗸 |  | 메시지 ID (고유값) |
+| `title` | `string` |  |  | 제목 |
+| `content` | `string` | 🗸 |  | 내용 |
+| `sender_user_id` | `string` | 🗸 |  | 발신자의 아이디 |
+| `recipient_user_id` | `string` | 🗸 |  | 수신자의 아이디 |
+| `sent_date` | `date` | 🗸 |  | 발신 일시 |
+| `read_date` | `date` |  |  | 읽음 일시 (읽지 않은 경우 `NULL`) |
+| `ipaddress` | `string` |  |  | IP 주소 |
+| `folder` | `string` | 🗸 | `Inbox` | 폴더: `Inbox` 또는 `Sent` |
+| `references` | `int[]` |  |  | 참조 (다른 메시지를 참고하는 경우, 해당 메시지(들)의 ID값을 담는다) |
+| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `files` | `File[]` |  |  | 첨부파일 |
 
 - 쪽지에 제목이 없을 수도 있으므로, RDX 아카이브를 처리하는 프로그램은 이를 감안하여야 합니다.
   예를 들어 내용의 첫 줄을 복사하여 자동으로 제목을 생성할 수 있습니다.
@@ -174,42 +174,42 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 ### Document
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `id` | `int` | Y | 문서 ID (고유값) |
-| `parent_id` | `int` |  | 상위 문서 ID (답글인 경우) |
-| `category` | `string` |  | 카테고리명 |
-| `lang_code` | `string` |  | 언어 코드 (예: `ko`) |
-| `title` | `string` | Y | 제목 |
-| `content` | `string` | Y | 내용 |
-| `slug` | `string` |  | 슬러그 (블로그 등에서 짧은주소 생성에 사용) |
-| `tags` | `string[]` |  | 태그 목록 |
-| `read_count` | `int` |  | 조회 수 |
-| `upvote_count` | `int` |  | 추천 수 |
-| `downvote_count` | `int` |  | 비추천 수 |
-| `comment_count` | `int` |  | 댓글 수 |
-| `trackback_count` | `int` |  | 트랙백 수 |
-| `file_count` | `int` |  | 첨부파일 수 |
-| `regdate` | `date` | Y | 등록일 |
-| `last_update` | `date` |  | 마지막 수정일 |
-| `ipaddress` | `string` |  | IP 주소 |
-| `user_id` | `string` |  | 작성자 아이디 |
-| `password` | `string` |  | 암호화된 비밀번호 (비회원 글인 경우) |
-| `user_name` | `string` |  | 작성자 이름 |
-| `nick_name` | `string` | Y | 작성자 닉네임 |
-| `email_address` | `string` |  | 작성자 이메일 주소 (비회원 글인 경우) |
-| `homepage` | `string` |  | 작성자 홈페이지 URL (비회원 글인 경우) |
-| `allow_comment` | `string` |  | 댓글 허용 여부: `Y` 또는 `N` |
-| `allow_trackback` | `string` |  | 트랙백 허용 여부: `Y` 또는 `N` |
-| `notify_message` | `string` |  | 알림 메시지 여부: `Y` 또는 `N` |
-| `is_notice` | `string` |  | 공지 여부: `Y` 또는 `N` 또는 `A` |
-| `title_bold` | `string` |  | 제목 굵게 여부: `Y` 또는 `N` |
-| `title_color` | `string` |  | 제목 색상: `#RRGGBB` |
-| `status` | `string` |  | 상태: `PUBLIC` 또는 `SECRET` |
-| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
-| `comments` | `Comment[]` |  | 댓글 (`Comment` 모델 인스턴스의 목록) |
-| `files` | `File[]` |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
-| `links` | `string[]` |  | 링크 (확장변수 외에 따로 추가한 경우에 한함) |
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `id` | `int` | 🗸 |  | 문서 ID (고유값) |
+| `parent_id` | `int` |  |  | 상위 문서 ID (답글인 경우) |
+| `category` | `string` |  |  | 카테고리명 |
+| `lang_code` | `string` |  |  | 언어 코드 (예: `ko`) |
+| `title` | `string` | 🗸 |  | 제목 |
+| `content` | `string` | 🗸 |  | 내용 |
+| `slug` | `string` |  |  | 슬러그 (블로그 등에서 짧은주소 생성에 사용) |
+| `tags` | `string[]` |  |  | 태그 목록 |
+| `read_count` | `int` |  | 0 | 조회 수 |
+| `upvote_count` | `int` |  | 0 | 추천 수 |
+| `downvote_count` | `int` |  | 0 | 비추천 수 |
+| `comment_count` | `int` |  | 0 | 댓글 수 |
+| `trackback_count` | `int` |  | 0 | 트랙백 수 |
+| `file_count` | `int` |  | 0 | 첨부파일 수 |
+| `regdate` | `date` | 🗸 |  | 등록일 |
+| `last_update` | `date` |  |  | 마지막 수정일 |
+| `ipaddress` | `string` |  |  | IP 주소 |
+| `user_id` | `string` |  |  | 작성자 아이디 |
+| `password` | `string` |  |  | 암호화된 비밀번호 (비회원 글인 경우) |
+| `user_name` | `string` |  |  | 작성자 이름 |
+| `nick_name` | `string` | 🗸 |  | 작성자 닉네임 |
+| `email_address` | `string` |  |  | 작성자 이메일 주소 (비회원 글인 경우) |
+| `homepage` | `string` |  |  | 작성자 홈페이지 URL (비회원 글인 경우) |
+| `allow_comment` | `string` |  | `Y` | 댓글 허용 여부: `Y` 또는 `N` |
+| `allow_trackback` | `string` |  | `Y` | 트랙백 허용 여부: `Y` 또는 `N` |
+| `notify_message` | `string` |  | `N` | 알림 메시지 여부: `Y` 또는 `N` |
+| `is_notice` | `string` |  | `N` | 공지 여부: `Y` 또는 `N` 또는 `A` |
+| `title_bold` | `string` |  | `N` | 제목 굵게 여부: `Y` 또는 `N` |
+| `title_color` | `string` |  |  | 제목 색상: `#RRGGBB` |
+| `status` | `string` |  | `PUBLIC` | 상태: `PUBLIC` 또는 `SECRET` |
+| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `comments` | `Comment[]` |  |  | 댓글 (`Comment` 모델 인스턴스의 목록) |
+| `files` | `File[]` |  |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
+| `links` | `string[]` |  |  | 링크 (확장변수 외에 따로 추가한 경우에 한함) |
 
 - 들여오는 사이트에서 답글을 지원하지 않을 수 있습니다.
 - 언어 구분이 없는 경우, 언어 코드를 임의로 생성하지 말고 `NULL`로 둡니다.
@@ -220,29 +220,29 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 ### Comment
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `id` | `int` | Y | 댓글 ID (고유값) |
-| `parent_id` | `int` |  | 부모 댓글 ID (대댓글인 경우) |
-| `content` | `string` | Y | 내용 |
-| `upvote_count` | `int` |  | 추천 수 |
-| `downvote_count` | `int` |  | 비추천 수 |
-| `comment_count` | `int` |  | 댓글 수 |
-| `trackback_count` | `int` |  | 트랙백 수 |
-| `file_count` | `int` |  | 첨부파일 수 |
-| `regdate` | `date` | Y | 등록일 |
-| `last_update` | `date` |  | 마지막 수정일 |
-| `ipaddress` | `string` |  | IP 주소 |
-| `user_id` | `string` |  | 작성자 아이디 |
-| `password` | `string` |  | 암호화된 비밀번호 (비회원 글인 경우) |
-| `user_name` | `string` |  | 작성자 이름 |
-| `nick_name` | `string` | Y | 작성자 닉네임 |
-| `email_address` | `string` |  | 작성자 이메일 주소 (비회원 글인 경우) |
-| `homepage` | `string` |  | 작성자 홈페이지 URL (비회원 글인 경우) |
-| `notify_message` | `string` |  | 알림 메시지 여부: `Y` 또는 `N` |
-| `status` | `string` |  | 상태: `PUBLIC` 또는 `SECRET` |
-| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
-| `files` | `File[]` |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `id` | `int` | 🗸 |  | 댓글 ID (고유값) |
+| `parent_id` | `int` |  |  | 부모 댓글 ID (대댓글인 경우) |
+| `content` | `string` | 🗸 |  | 내용 |
+| `upvote_count` | `int` |  | 0 | 추천 수 |
+| `downvote_count` | `int` |  | 0 | 비추천 수 |
+| `comment_count` | `int` |  | 0 | 댓글 수 |
+| `trackback_count` | `int` |  | 0 | 트랙백 수 |
+| `file_count` | `int` |  | 0 | 첨부파일 수 |
+| `regdate` | `date` | 🗸 |  | 등록일 |
+| `last_update` | `date` |  |  | 마지막 수정일 |
+| `ipaddress` | `string` |  |  | IP 주소 |
+| `user_id` | `string` |  |  | 작성자 아이디 |
+| `password` | `string` |  |  | 암호화된 비밀번호 (비회원 글인 경우) |
+| `user_name` | `string` |  |  | 작성자 이름 |
+| `nick_name` | `string` | 🗸 |  | 작성자 닉네임 |
+| `email_address` | `string` |  |  | 작성자 이메일 주소 (비회원 글인 경우) |
+| `homepage` | `string` |  |  | 작성자 홈페이지 URL (비회원 글인 경우) |
+| `notify_message` | `string` |  | `N` | 알림 메시지 여부: `Y` 또는 `N` |
+| `status` | `string` |  | `PUBLIC` | 상태: `PUBLIC` 또는 `SECRET` |
+| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `files` | `File[]` |  |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
 
 - 들여오는 사이트에서 대댓글을 지원하지 않을 수 있습니다.
 - 조회 수, 추천 수, 댓글 수 등 모든 `count` 속성의 기본값은 0입니다.
@@ -251,25 +251,25 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 ### File
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `id` | `int` | Y | 파일 ID (고유값) |
-| `filename` | `string` | Y | 원본 파일명 (예: example.jpg) |
-| `path` | `string` | Y | 실제 파일이 저장된 경로 (아래 참고) |
-| `url` | `string` | Y | CMS 설치 경로를 기준으로 한 URL (아래 참고) |
-| `download_count` | `int` |  | 다운로드 수 |
-| `regdate` | `date` | Y | 등록일 |
-| `ipaddress` | `string` |  | IP 주소 |
-| `file_size` | `int` | Y | 파일 크기 |
-| `mime_type` | `string` |  | MIME 타입 |
-| `original_type` | `string` |  | 변환된 파일인 경우, 원본의 타입 |
-| `width` | `int` |  | 이미지 너비 (px) |
-| `height` | `int` |  | 이미지 높이 (px) |
-| `duration` | `int` |  | 동영상/오디오 길이 (초) |
-| `is_valid` | `string` |  | 유효 여부: `Y` 또는 `N` |
-| `is_cover_image` | `string` |  | 대표 이미지 여부: `Y` 또는 `N` |
-| `comment` | `string` |  | 관리용 설명 (비공개) |
-| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `id` | `int` | 🗸 |  | 파일 ID (고유값) |
+| `filename` | `string` | 🗸 |  | 원본 파일명 (예: example.jpg) |
+| `path` | `string` | 🗸 |  | 실제 파일이 저장된 경로 (아래 참고) |
+| `url` | `string` | 🗸 |  | CMS 설치 경로를 기준으로 한 URL (아래 참고) |
+| `download_count` | `int` |  | 0 | 다운로드 수 |
+| `regdate` | `date` | 🗸 |  | 등록일 |
+| `ipaddress` | `string` |  |  | IP 주소 |
+| `file_size` | `int` | 🗸 |  | 파일 크기 |
+| `mime_type` | `string` |  |  | MIME 타입 |
+| `original_type` | `string` |  |  | 변환된 파일인 경우, 원본의 타입 |
+| `width` | `int` |  |  | 이미지 너비 (px) |
+| `height` | `int` |  |  | 이미지 높이 (px) |
+| `duration` | `int` |  |  | 동영상/오디오 길이 (초) |
+| `is_valid` | `string` |  | `Y` | 유효 여부: `Y` 또는 `N` |
+| `is_cover_image` | `string` |  | `N` | 대표 이미지 여부: `Y` 또는 `N` |
+| `comment` | `string` |  |  | 관리용 설명 (비공개) |
+| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
 
 - MIME 타입, 이미지 및 동영상 속성 등을 임의로 입력하기보다는 들여오는 사이트의 판단에 맡기는 것을 권장합니다.
 - 관리용 설명과 확장변수는 들여오는 사이트에서 지원하지 않을 수 있습니다.
@@ -277,7 +277,6 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 ### 공통
 
 - 각 레코드의 ID는 하나의 RDX 아카이브 내에서 상호 참조를 위해 사용하는 값으로, 들여오기할 때 해당 ID가 그대로 유지된다는 보장은 없습니다.
-- 필수가 아닌 속성에 값이 없는 경우, 들여오는 사이트에서 적절한 기본값으로 치환할 수 있습니다.
 - 필수가 아니고 값이 없는 속성이라도 존재해야 합니다. 속성을 삭제해서는 안 됩니다.
 - `int` 타입의 속성에 값이 없는 경우에는 `0`을 넣습니다.
 - `string` 타입의 속성에 값이 없는 경우에는 `NULL`을 넣습니다. 단, `Y`/`N`과 같이 특정한 형식의 문자열이 요구되는 경우에는 해당 형식에 맞는 값을 넣어야 합니다.
