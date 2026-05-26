@@ -146,7 +146,23 @@ class Rhymix implements DriverInterface
 		$password = trim($vars['zip_password'] ?? '');
 		$rdx = new RDXWriter($path, $password);
 		$rdx->setSource($this instanceof XE1 ? 'XE1' : 'Rhymix');
+
+		// Set the timezone.
 		$rdx->setTimezone('Asia/Seoul');
+		if (isset($this->config['locale']['internal_timezone']))
+		{
+			if ($this->config['locale']['internal_timezone'] == 0)
+			{
+				$rdx->setTimezone('UTC');
+			}
+		}
+		if ($this instanceof XE1 && isset($this->config['time_zone']))
+		{
+			if ($this->config['time_zone'] === '0000')
+			{
+				$rdx->setTimezone('UTC');
+			}
+		}
 
 		// Export members.
 		if (in_array('member', $export_types))
