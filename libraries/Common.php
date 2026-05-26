@@ -50,6 +50,8 @@ function auto_detect_cms()
 			return ['Gnuboard5', $dir];
 		} elseif (file_exists($dir . '/wp-config.php')) {
 			return ['WordPress', $dir];
+		} elseif (file_exists($dir . '/config.php') && file_exists($dir . '/zboard.php')) {
+			return ['Zeroboard', $dir];
 		} else {
 			return ['', ''];
 		}

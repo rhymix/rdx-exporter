@@ -21,14 +21,15 @@
 		<select id="cms_type" name="cms_type">
 			<option value=""></option>
 			<option value="Rhymix"<?php echo $cms_type === 'Rhymix' ? ' selected' : ''; ?>>Rhymix</option>
-			<option value="XE1"<?php echo $cms_type === 'XE1' ? ' selected' : ''; ?>>XpressEngine 1.x</option>
-			<option value="XE3"<?php echo $cms_type === 'XE3' ? ' selected' : ''; ?>>XpressEngine 3.x</option>
+			<option value="XE1"<?php echo $cms_type === 'XE1' ? ' selected' : ''; ?>>XpressEngine 1</option>
+			<option value="XE3"<?php echo $cms_type === 'XE3' ? ' selected' : ''; ?>>XpressEngine 3</option>
+			<option value="Zeroboard"<?php echo $cms_type === 'Zeroboard' ? ' selected' : ''; ?>>Zeroboard 4</option>
 			<option value="Gnuboard5"<?php echo $cms_type === 'Gnuboard5' ? ' selected' : ''; ?>>Gnuboard 5</option>
 			<option value="WordPress"<?php echo $cms_type === 'WordPress' ? ' selected' : ''; ?>>WordPress</option>
 		</select>
 	</div>
 
-	<div class="credentials" data-for-cms="Rhymix XE1 Gnuboard5 WordPress">
+	<div class="credentials" data-for-cms="Rhymix XE1 Gnuboard5 WordPress Zeroboard">
 		<label for="xe1_install_path"><?php echo lang('install_path'); ?></label>
 		<input type="text" id="xe1_install_path" name="install_path" value="<?php echo escape($cms_path); ?>" />
 		<label for="xe1_db_password"><?php echo lang('db_password'); ?></label>

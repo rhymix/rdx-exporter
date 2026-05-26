@@ -17,6 +17,7 @@ $lang->include_attachments = 'Include Attachments';
 $lang->include_attachments_desc = 'Including attachments in the export may significantly increase file size and processing time. It is recommended to upload attachments directly to the same path if possible.';
 $lang->zip_password = 'Zip Password';
 $lang->zip_password_desc = 'Setting a password on the archive enhances security, but it may increase the time required for export and import. If you don\'t set a password, please delete the archive files immediately after the operation to prevent unauthorized access.';
+$lang->db_charset = 'DB Character Set';
 $lang->yes = 'Yes';
 $lang->no = 'No';
 $lang->select_boards = 'Select Boards';
