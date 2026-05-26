@@ -600,13 +600,26 @@ class Gnuboard5 implements DriverInterface
 
 					// Comments
 					$stmt2->execute([$row->wr_id]);
-					while ($cmt = $stmt2->fetchObject())
+					$cmts = $stmt2->fetchAll(PDO::FETCH_OBJ);
+					$reply_map = [];
+					foreach ($cmts as $cmt)
+					{
+						$reply_key = $cmt->wr_comment_reply ? ord($cmt->wr_comment_reply) : 64;
+						$reply_map[$cmt->wr_parent . '/' . $cmt->wr_comment . '/' . $reply_key] = intval($cmt->wr_id);
+					}
+					foreach ($cmts as $cmt)
 					{
 						// Basic information
 						$comment_info = new CommentModel();
 						$comment_info->id = (int)$cmt->wr_id;
-						$comment_info->parent_id = $cmt->wr_comment_reply ? abs(intval($cmt->wr_comment)) : null;
 						$comment_info->content = $cmt->wr_content;
+
+						// Parent mapping for replies
+						if ($cmt->wr_comment_reply)
+						{
+							$reply_key = ord($cmt->wr_comment_reply) - 1;
+							$comment_info->parent_id = $reply_map[$cmt->wr_parent . '/' . $cmt->wr_comment . '/' . $reply_key] ?? 0;
+						}
 
 						// Counters
 						$comment_info->upvote_count = intval($cmt->wr_good ?? 0);
