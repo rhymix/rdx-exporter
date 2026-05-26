@@ -110,146 +110,180 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 
 ### Member
 
-| Name | Type | Description |
-|------|------|-------------|
-| `user_id` | string | 아이디 |
-| `password` | string | 암호화된 비밀번호 |
-| `user_name` | string | 이름 |
-| `nick_name` | string | 닉네임 |
-| `email_address` | string | 이메일 주소 |
-| `phone_number` | string | 전화번호 (숫자만) |
-| `phone_country` | string | 전화번호의 3자리 국가 코드 (예: KOR) |
-| `phone_type` | string | 전화번호 종류: `mobile`, `home`, `work` 등 |
-| `signup_date` | date | 가입일 |
-| `signup_ipaddress` | string | 가입 IP 주소 |
-| `last_login_date` | date | 마지막 로그인 일시 |
-| `last_login_ipaddress` | string | 마지막 로그인 IP 주소 |
-| `change_password_date` | date | 마지막 비밀번호 변경 일시 |
-| `denied_until_date` | date | 로그인이 제한된 경우, 제한 해제 일시 |
-| `is_admin` | string | 관리자 여부: `Y` 또는 `N` |
-| `admin_description` | string | 관리용 설명 (비공개) |
-| `status` | string | 상태: `APPROVED` 또는 `DENIED` |
-| `homepage` | string | 홈페이지 URL |
-| `blog` | string | 블로그 URL |
-| `birthday` | date | 생년월일 |
-| `profile_image` | string | 프로필 이미지 파일 (아래 참고) |
-| `signature` | string | 서명 또는 자기소개 (공개) |
-| `allow_mailing` | string | 메일 수신 허용 여부: `Y` 또는 `N` |
-| `allow_message` | string | 쪽지 수신 허용 여부: `Y` 또는 `N` |
-| `extra_vars` | array | 확장 변수 (key-value pair) |
-| `groups` | string[] | 소속 그룹명 |
-| `points` | int | 보유 포인트 |
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `user_id` | `string` | Y | 아이디 |
+| `password` | `string` | Y | 암호화된 비밀번호 |
+| `user_name` | `string` |  | 이름 |
+| `nick_name` | `string` | Y | 닉네임 |
+| `email_address` | `string` |  | 이메일 주소 |
+| `phone_number` | `string` |  | 전화번호 (숫자만) |
+| `phone_country` | `string` |  | 전화번호의 3자리 국가 코드 (예: KOR) |
+| `phone_type` | `string` |  | 전화번호 종류: `mobile`, `home`, `work` 등 |
+| `signup_date` | `date` | Y | 가입일 |
+| `signup_ipaddress` | `string` |  | 가입 IP 주소 |
+| `last_login_date` | `date` |  | 마지막 로그인 일시 |
+| `last_login_ipaddress` | `string` |  | 마지막 로그인 IP 주소 |
+| `change_password_date` | `date` |  | 마지막 비밀번호 변경 일시 |
+| `denied_until_date` | `date` |  | 로그인이 제한된 경우, 제한 해제 일시 |
+| `is_admin` | `string` |  | 관리자 여부: `Y` 또는 `N` |
+| `admin_description` | `string` |  | 관리용 설명 (비공개) |
+| `status` | `string` |  | 상태: `APPROVED` 또는 `DENIED` |
+| `homepage` | `string` |  | 홈페이지 URL |
+| `blog` | `string` |  | 블로그 URL |
+| `birthday` | `date` |  | 생년월일 |
+| `profile_image` | `string` |  | 프로필 이미지 파일 (아래 참고) |
+| `signature` | `string` |  | 서명 또는 자기소개 (공개) |
+| `allow_mailing` | `string` |  | 메일 수신 허용 여부: `Y` 또는 `N` |
+| `allow_message` | `string` |  | 쪽지 수신 허용 여부: `Y` 또는 `N` |
+| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
+| `groups` | `string[]` |  | 소속 그룹명 |
+| `points` | `int` |  | 보유 포인트 |
+
+- RDX 아카이브 내에서 회원을 참조할 때는 항상 `user_id`를 사용합니다.
+  XE/Rhymix의 `member_srl`이나 각 테이블의 `auto_increment`와 같은 정수값은 데이터를 들여오는 사이트에서 그대로 유지된다는 보장이 없기 때문입니다.
+- `user_id`는 중복되어서는 안 됩니다.
+- 비밀번호는 일반적인 PHP CMS에서 사용하는 암호화 방식이라면 그대로 넣어도 무방합니다.
+  Rhymix의 경우, bcrypt, pbkdf2, sha256, sha1, md5, MySQL `PASSWORD()` 등을 지원합니다.
+- 원본 비밀번호를 알 수 없는 경우, 임의의 문자열을 md5 또는 sha1으로 암호화하여 넣는 것을 추천합니다. (사실상 로그인 금지)
+- `profile_image`는 첨부파일의 `path`와 동일한 형식으로 합니다.
+- 생년월일은 YYYYMMDD 형식으로 합니다.
 
 ### Message
 
-| Name | Type | Description |
-|------|------|-------------|
-| `id` | int | 메시지 ID (고유값) |
-| `title` | string | 제목 |
-| `content` | string | 내용 |
-| `sender_user_id` | string | 발신자의 아이디 |
-| `recipient_user_id` | string | 수신자의 아이디 |
-| `sent_date` | date | 발신 일시 |
-| `read_date` | date | 읽음 일시 (읽지 않은 경우 `NULL`) |
-| `ipaddress` | string | IP 주소 |
-| `folder` | string | 폴더: `Inbox` 또는 `Sent` |
-| `references` | int[] | 참조 (다른 메시지를 참고하는 경우, 해당 메시지(들)의 ID값을 담는다) |
-| `extra_vars` | array | 확장 변수 (key-value pair) |
-| `files` | File[] | 첨부파일 |
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `id` | `int` | Y | 메시지 ID (고유값) |
+| `title` | `string` |  | 제목 |
+| `content` | `string` | Y | 내용 |
+| `sender_user_id` | `string` | Y | 발신자의 아이디 |
+| `recipient_user_id` | `string` | Y | 수신자의 아이디 |
+| `sent_date` | `date` | Y | 발신 일시 |
+| `read_date` | `date` |  | 읽음 일시 (읽지 않은 경우 `NULL`) |
+| `ipaddress` | `string` |  | IP 주소 |
+| `folder` | `string` | Y | 폴더: `Inbox` 또는 `Sent` |
+| `references` | `int[]` |  | 참조 (다른 메시지를 참고하는 경우, 해당 메시지(들)의 ID값을 담는다) |
+| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
+| `files` | `File[]` |  | 첨부파일 |
+
+- 쪽지에 제목이 없을 수도 있으므로, RDX 아카이브를 처리하는 프로그램은 이를 감안하여야 합니다.
+  예를 들어 내용의 첫 줄을 복사하여 자동으로 제목을 생성할 수 있습니다.
+- 보낸이와 받는이의 쪽지함에 모두 쪽지가 저장되어 있어야 하는 경우, 같은 내용으로 2개의 레코드를 생성하고 하나는 `Inbox`, 하나는 `Sent`에 넣습니다.
+  단, 보낸이와 받는이 중 어느 한 쪽에서만 쪽지를 삭제한 경우에는 둘 중 하나가 존재하지 않을 수도 있습니다. (상대방의 쪽지함에서는 삭제되지 않는다고 가정합니다.)
+- 쪽지에 파일이 첨부되어 있을 수 있으나, 들여오는 사이트에서 첨부파일을 지원한다는 보장은 없습니다.
 
 ### Document
 
-| Name | Type | Description |
-|------|------|-------------|
-| `id` | int | 문서 ID (고유값) |
-| `parent_id` | int | 상위 문서 ID |
-| `category` | string | 카테고리명 |
-| `lang_code` | string | 언어 코드 (예: `ko`) |
-| `title` | string | 제목 |
-| `content` | string | 내용 |
-| `slug` | string | 슬러그 (블로그 등에서 짧은주소 생성에 사용) |
-| `tags` | string[] | 태그 목록 |
-| `read_count` | int | 조회 수 |
-| `upvote_count` | int | 추천 수 |
-| `downvote_count` | int | 비추천 수 |
-| `comment_count` | int | 댓글 수 |
-| `trackback_count` | int | 트랙백 수 |
-| `file_count` | int | 첨부파일 수 |
-| `regdate` | date | 등록일 |
-| `last_update` | date | 마지막 수정일 |
-| `ipaddress` | string | IP 주소 |
-| `user_id` | string | 작성자 아이디 |
-| `password` | string | 암호화된 비밀번호 (비회원 글인 경우) |
-| `user_name` | string | 작성자 이름 |
-| `nick_name` | string | 작성자 닉네임 |
-| `email_address` | string | 작성자 이메일 주소 (비회원 글인 경우) |
-| `homepage` | string | 작성자 홈페이지 URL (비회원 글인 경우) |
-| `allow_comment` | string | 댓글 허용 여부: `Y` 또는 `N` |
-| `allow_trackback` | string | 트랙백 허용 여부: `Y` 또는 `N` |
-| `notify_message` | string | 알림 메시지 여부: `Y` 또는 `N` |
-| `is_notice` | string | 공지 여부: `Y` 또는 `N` 또는 `A` |
-| `title_bold` | string | 제목 굵게 여부: `Y` 또는 `N` |
-| `title_color` | string | 제목 색상: `#RRGGBB` |
-| `status` | string | 상태: `PUBLIC` 또는 `SECRET` |
-| `extra_vars` | array | 확장 변수 (key-value pair) |
-| `comments` | Comment[] | 댓글 (`Comment` 모델 인스턴스의 목록) |
-| `files` | File[] | 첨부파일 (`File` 모델 인스턴스의 목록) |
-| `links` | string[] | 링크 (확장변수 외에 따로 추가한 경우에 한함) |
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `id` | `int` | Y | 문서 ID (고유값) |
+| `parent_id` | `int` |  | 상위 문서 ID (답글인 경우) |
+| `category` | `string` |  | 카테고리명 |
+| `lang_code` | `string` |  | 언어 코드 (예: `ko`) |
+| `title` | `string` | Y | 제목 |
+| `content` | `string` | Y | 내용 |
+| `slug` | `string` |  | 슬러그 (블로그 등에서 짧은주소 생성에 사용) |
+| `tags` | `string[]` |  | 태그 목록 |
+| `read_count` | `int` |  | 조회 수 |
+| `upvote_count` | `int` |  | 추천 수 |
+| `downvote_count` | `int` |  | 비추천 수 |
+| `comment_count` | `int` |  | 댓글 수 |
+| `trackback_count` | `int` |  | 트랙백 수 |
+| `file_count` | `int` |  | 첨부파일 수 |
+| `regdate` | `date` | Y | 등록일 |
+| `last_update` | `date` |  | 마지막 수정일 |
+| `ipaddress` | `string` |  | IP 주소 |
+| `user_id` | `string` |  | 작성자 아이디 |
+| `password` | `string` |  | 암호화된 비밀번호 (비회원 글인 경우) |
+| `user_name` | `string` |  | 작성자 이름 |
+| `nick_name` | `string` | Y | 작성자 닉네임 |
+| `email_address` | `string` |  | 작성자 이메일 주소 (비회원 글인 경우) |
+| `homepage` | `string` |  | 작성자 홈페이지 URL (비회원 글인 경우) |
+| `allow_comment` | `string` |  | 댓글 허용 여부: `Y` 또는 `N` |
+| `allow_trackback` | `string` |  | 트랙백 허용 여부: `Y` 또는 `N` |
+| `notify_message` | `string` |  | 알림 메시지 여부: `Y` 또는 `N` |
+| `is_notice` | `string` |  | 공지 여부: `Y` 또는 `N` 또는 `A` |
+| `title_bold` | `string` |  | 제목 굵게 여부: `Y` 또는 `N` |
+| `title_color` | `string` |  | 제목 색상: `#RRGGBB` |
+| `status` | `string` |  | 상태: `PUBLIC` 또는 `SECRET` |
+| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
+| `comments` | `Comment[]` |  | 댓글 (`Comment` 모델 인스턴스의 목록) |
+| `files` | `File[]` |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
+| `links` | `string[]` |  | 링크 (확장변수 외에 따로 추가한 경우에 한함) |
+
+- 들여오는 사이트에서 답글을 지원하지 않을 수 있습니다.
+- 언어 구분이 없는 경우, 언어 코드를 임의로 생성하지 말고 `NULL`로 둡니다.
+- 조회 수, 추천 수, 댓글 수 등 모든 `count` 속성의 기본값은 0입니다.
+- 비회원이 작성한 글인 경우 `user_id`를 `NULL`로 두고, 비회원이 입력한 이름을 `nick_name`에 넣습니다.
+- 전체공지는 `A`로 표시합니다.
+- 글에 링크를 첨부할 수 있으나, 들여오는 사이트에서 링크를 지원하지 않는 경우 본문에 추가되거나 확장변수로 처리될 수 있다고 가정하여야 합니다.
 
 ### Comment
 
-| Name | Type | Description |
-|------|------|-------------|
-| `id` | int | 댓글 ID (고유값) |
-| `parent_id` | int | 상위 댓글 ID |
-| `content` | string | 내용 |
-| `upvote_count` | int | 추천 수 |
-| `downvote_count` | int | 비추천 수 |
-| `comment_count` | int | 댓글 수 |
-| `trackback_count` | int | 트랙백 수 |
-| `file_count` | int | 첨부파일 수 |
-| `regdate` | date | 등록일 |
-| `last_update` | date | 마지막 수정일 |
-| `ipaddress` | string | IP 주소 |
-| `user_id` | string | 작성자 아이디 |
-| `password` | string | 암호화된 비밀번호 (비회원 글인 경우) |
-| `user_name` | string | 작성자 이름 |
-| `nick_name` | string | 작성자 닉네임 |
-| `email_address` | string | 작성자 이메일 주소 (비회원 글인 경우) |
-| `homepage` | string | 작성자 홈페이지 URL (비회원 글인 경우) |
-| `notify_message` | string | 알림 메시지 여부: `Y` 또는 `N` |
-| `status` | string | 상태: `PUBLIC` 또는 `SECRET` |
-| `extra_vars` | array | 확장 변수 (key-value pair) |
-| `files` | File[] | 첨부파일 (`File` 모델 인스턴스의 목록) |
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `id` | `int` | Y | 댓글 ID (고유값) |
+| `parent_id` | `int` |  | 부모 댓글 ID (대댓글인 경우) |
+| `content` | `string` | Y | 내용 |
+| `upvote_count` | `int` |  | 추천 수 |
+| `downvote_count` | `int` |  | 비추천 수 |
+| `comment_count` | `int` |  | 댓글 수 |
+| `trackback_count` | `int` |  | 트랙백 수 |
+| `file_count` | `int` |  | 첨부파일 수 |
+| `regdate` | `date` | Y | 등록일 |
+| `last_update` | `date` |  | 마지막 수정일 |
+| `ipaddress` | `string` |  | IP 주소 |
+| `user_id` | `string` |  | 작성자 아이디 |
+| `password` | `string` |  | 암호화된 비밀번호 (비회원 글인 경우) |
+| `user_name` | `string` |  | 작성자 이름 |
+| `nick_name` | `string` | Y | 작성자 닉네임 |
+| `email_address` | `string` |  | 작성자 이메일 주소 (비회원 글인 경우) |
+| `homepage` | `string` |  | 작성자 홈페이지 URL (비회원 글인 경우) |
+| `notify_message` | `string` |  | 알림 메시지 여부: `Y` 또는 `N` |
+| `status` | `string` |  | 상태: `PUBLIC` 또는 `SECRET` |
+| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
+| `files` | `File[]` |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
+
+- 들여오는 사이트에서 대댓글을 지원하지 않을 수 있습니다.
+- 조회 수, 추천 수, 댓글 수 등 모든 `count` 속성의 기본값은 0입니다.
+- 비회원이 작성한 글인 경우 `user_id`를 `NULL`로 두고, 비회원이 입력한 이름을 `nick_name`에 넣습니다.
+- 댓글에 파일을 첨부하거나 확장변수를 지정할 수 있으나, 들여오는 사이트에서 지원하지 않을 수도 있다고 가정하여야 합니다.
 
 ### File
 
-| Name | Type | Description |
-|------|------|-------------|
-| `id` | int | 파일 ID (고유값) |
-| `filename` | string | 원본 파일명 (예: example.jpg) |
-| `path` | string | 실제 파일이 저장된 경로 (아래 참고) |
-| `url` | string | CMS 설치 경로를 기준으로 한 URL (아래 참고) |
-| `download_count` | int | 다운로드 수 |
-| `regdate` | date | 등록일 |
-| `ipaddress` | string | IP 주소 |
-| `file_size` | int | 파일 크기 |
-| `mime_type` | string | MIME 타입 |
-| `original_type` | string | 변환된 파일인 경우, 원본의 타입 |
-| `width` | int | 이미지 너비 (px) |
-| `height` | int | 이미지 높이 (px) |
-| `duration` | int | 동영상/오디오 길이 (초) |
-| `is_valid` | string | 유효 여부: `Y` 또는 `N` |
-| `is_cover_image` | string | 대표 이미지 여부: `Y` 또는 `N` |
-| `comment` | string | 관리용 설명 (비공개) |
-| `extra_vars` | array | 확장 변수 (key-value pair) |
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `id` | `int` | Y | 파일 ID (고유값) |
+| `filename` | `string` | Y | 원본 파일명 (예: example.jpg) |
+| `path` | `string` | Y | 실제 파일이 저장된 경로 (아래 참고) |
+| `url` | `string` | Y | CMS 설치 경로를 기준으로 한 URL (아래 참고) |
+| `download_count` | `int` |  | 다운로드 수 |
+| `regdate` | `date` | Y | 등록일 |
+| `ipaddress` | `string` |  | IP 주소 |
+| `file_size` | `int` | Y | 파일 크기 |
+| `mime_type` | `string` |  | MIME 타입 |
+| `original_type` | `string` |  | 변환된 파일인 경우, 원본의 타입 |
+| `width` | `int` |  | 이미지 너비 (px) |
+| `height` | `int` |  | 이미지 높이 (px) |
+| `duration` | `int` |  | 동영상/오디오 길이 (초) |
+| `is_valid` | `string` |  | 유효 여부: `Y` 또는 `N` |
+| `is_cover_image` | `string` |  | 대표 이미지 여부: `Y` 또는 `N` |
+| `comment` | `string` |  | 관리용 설명 (비공개) |
+| `extra_vars` | `array` |  | 확장 변수 (key-value pair) |
+
+- MIME 타입, 이미지 및 동영상 속성 등을 임의로 입력하기보다는 들여오는 사이트의 판단에 맡기는 것을 권장합니다.
+- 관리용 설명과 확장변수는 들여오는 사이트에서 지원하지 않을 수 있습니다.
 
 ### 공통
 
 - 각 레코드의 ID는 하나의 RDX 아카이브 내에서 상호 참조를 위해 사용하는 값으로, 들여오기할 때 해당 ID가 그대로 유지된다는 보장은 없습니다.
+- 필수가 아닌 속성에 값이 없는 경우, 들여오는 사이트에서 적절한 기본값으로 치환할 수 있습니다.
+- 필수가 아니고 값이 없는 속성이라도 존재해야 합니다. 속성을 삭제해서는 안 됩니다.
 - `int` 타입의 속성에 값이 없는 경우에는 `0`을 넣습니다.
-- `string` 타입의 속성에 값이 없는 경우에는 `NULL`을 넣습니다.
+- `string` 타입의 속성에 값이 없는 경우에는 `NULL`을 넣습니다. 단, `Y`/`N`과 같이 특정한 형식의 문자열이 요구되는 경우에는 해당 형식에 맞는 값을 넣어야 합니다.
+- 배열 타입의 속성에 값이 없는 경우에는 빈 배열을 넣습니다. `NULL`로 치환하지 않습니다.
 - `date`는 `YmdHis` 형식으로 14바이트여야 하며, 해당 형식에 맞는 데이터를 넣을 수 없는 경우 `NULL`을 넣습니다.
+  생일 등 특별히 허용되는 속성이 아니라면 8자리 날짜(`Ymd`)만 입력하는 것은 허용하지 않습니다.
 - `Comment`와 `File`은 다른 클래스의 속성으로 들어갈 뿐, 데이터 레코드의 최상위 계층으로 등장하지 않습니다.
 - 확장변수는 key-value pair로 표현된 JSON 객체로, key는 문자열이어야 하며 value는 문자열, 숫자, 불리언, list 또는 `NULL`이 될 수 있습니다.
   기본적으로 Rhymix에서 array로 취급하는 확장변수는 모두 list로 인코딩합니다.
