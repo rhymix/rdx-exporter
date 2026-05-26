@@ -291,9 +291,21 @@ class XE3 implements DriverInterface
 		// Preparation.
 		$batch = 1000;
 		$prefix = $this->prefix;
-		$stmt1 = $this->db->prepare("SELECT u.*, p.point FROM {$prefix}user AS u " .
-			"LEFT JOIN {$prefix}point AS p ON u.id = p.user_id " .
-			"WHERE u.id > ? ORDER BY u.id ASC LIMIT $batch");
+
+		// Check if the point table exists.
+		$stmt = $this->db->query("SHOW TABLES LIKE '{$prefix}point'");
+		$rows = $stmt->fetchAll();
+		if (count($rows))
+		{
+			$stmt1 = $this->db->prepare("SELECT u.*, p.point FROM {$prefix}user AS u " .
+				"LEFT JOIN {$prefix}point AS p ON u.id = p.user_id " .
+				"WHERE u.id > ? ORDER BY u.id ASC LIMIT $batch");
+		}
+		else
+		{
+			$stmt1 = $this->db->prepare("SELECT u.* FROM {$prefix}user AS u " .
+				"WHERE u.id > ? ORDER BY u.id ASC LIMIT $batch");
+		}
 
 		// Pre-fetch the list of groups.
 		$all_groups = [];
