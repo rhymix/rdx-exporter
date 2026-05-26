@@ -29,7 +29,7 @@
 		</select>
 	</div>
 
-	<div class="credentials" data-for-cms="Rhymix XE1 Gnuboard5 WordPress Zeroboard">
+	<div class="credentials" data-for-cms="Rhymix XE1 XE3 Gnuboard5 WordPress Zeroboard">
 		<label for="xe1_install_path"><?php echo lang('install_path'); ?></label>
 		<input type="text" id="xe1_install_path" name="install_path" value="<?php echo escape($cms_path); ?>" />
 		<label for="xe1_db_password"><?php echo lang('db_password'); ?></label>
@@ -37,7 +37,7 @@
 		<button class="validate-button" data-waiting-text="<?php echo lang('validating'); ?>"><?php echo lang('validate'); ?></button>
 	</div>
 
-	<div class="credentials" data-for-cms="XE3">
+	<div class="credentials" data-for-cms="Unsupported">
 		<?php echo lang('not_supported_yet'); ?>
 	</div>
 
