@@ -11,7 +11,7 @@ use Rhymix\DataExchange\Models\File as FileModel;
 use PDO;
 use PDOException;
 
-class WordPress extends AbstractDriver
+class WordPress implements DriverInterface
 {
 	/*
 	 * Attributes for internal caching.

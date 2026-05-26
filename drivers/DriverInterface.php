@@ -2,7 +2,7 @@
 
 namespace Rhymix\DataExchange\Drivers;
 
-abstract class AbstractDriver
+interface DriverInterface
 {
 	/**
 	 * Validate the provided configuration parameters.
@@ -10,7 +10,7 @@ abstract class AbstractDriver
 	 * @param array $vars
 	 * @return array
 	 */
-	abstract public function validate($vars);
+	public function validate($vars);
 
 	/**
 	 * Export data based on the provided configuration parameters.
@@ -18,5 +18,5 @@ abstract class AbstractDriver
 	 * @param array $vars
 	 * @return array
 	 */
-	abstract public function export($vars);
+	public function export($vars);
 }

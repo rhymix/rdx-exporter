@@ -11,7 +11,7 @@ use Rhymix\DataExchange\Models\File as FileModel;
 use PDO;
 use PDOException;
 
-class Zeroboard extends AbstractDriver
+class Zeroboard implements DriverInterface
 {
 	/*
 	 * Attributes for internal caching.

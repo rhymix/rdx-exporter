@@ -11,7 +11,7 @@ use Rhymix\DataExchange\Models\File as FileModel;
 use PDO;
 use PDOException;
 
-class XE3 extends AbstractDriver
+class XE3 implements DriverInterface
 {
 	/*
 	 * Attributes for internal caching.
