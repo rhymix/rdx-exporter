@@ -391,7 +391,7 @@ class Zeroboard implements DriverInterface
 				{
 					if (!empty($row->{$field}))
 					{
-						$info->extra_vars[$field] = trim($row->{$field});
+						$info->extra_vars->{$field} = trim($row->{$field});
 					}
 				}
 
@@ -639,15 +639,15 @@ class Zeroboard implements DriverInterface
 					// Extra fields
 					if (!empty($row->x))
 					{
-						$info->extra_vars['x'] = trim($row->x);
+						$info->extra_vars->x = trim($row->x);
 					}
 					if (!empty($row->y))
 					{
-						$info->extra_vars['y'] = trim($row->y);
+						$info->extra_vars->y = trim($row->y);
 					}
 					if (!empty($row->z))
 					{
-						$info->extra_vars['z'] = trim($row->z);
+						$info->extra_vars->z = trim($row->z);
 					}
 
 					// Comments

@@ -29,5 +29,11 @@ class File
 	public $is_valid = 'Y';
 	public $is_cover_image = 'N';
 	public $comment = '';
-	public $extra_vars = [];
+	public $extra_vars;
+
+	// Constructor initializes extra_vars to an empty object
+	public function __construct()
+	{
+		$this->extra_vars = new \stdClass();
+	}
 }

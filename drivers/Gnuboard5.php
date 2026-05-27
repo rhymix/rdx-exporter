@@ -371,7 +371,7 @@ class Gnuboard5 implements DriverInterface
 				// Extra vars
 				if (!empty($row->mb_zip1) && !empty($row->mb_zip2))
 				{
-					$info->extra_vars['address'] = [
+					$info->extra_vars->address = [
 						$row->mb_zip1 . $row->mb_zip2,
 						$row->mb_addr1 ?? '',
 						$row->mb_addr2 ?? '',
@@ -382,7 +382,7 @@ class Gnuboard5 implements DriverInterface
 				{
 					if (isset($row->{"mb_{$j}"}) && $row->{"mb_{$j}"} !== '')
 					{
-						$info->extra_vars["mb_{$j}"] = $row->{"mb_{$j}"};
+						$info->extra_vars->{"mb_{$j}"} = $row->{"mb_{$j}"};
 					}
 				}
 
@@ -594,7 +594,7 @@ class Gnuboard5 implements DriverInterface
 					{
 						if (isset($row->{"wr_{$j}"}) && $row->{"wr_{$j}"} !== '')
 						{
-							$info->extra_vars["wr_{$j}"] = $row->{"wr_{$j}"};
+							$info->extra_vars->{"wr_{$j}"} = $row->{"wr_{$j}"};
 						}
 					}
 

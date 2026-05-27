@@ -43,10 +43,16 @@ class Document
 	public $title_bold = 'N';
 	public $title_color = '';
 	public $status = 'PUBLIC';
-	public $extra_vars = [];
+	public $extra_vars;
 
 	// Comments, files, and links
 	public $comments = [];
 	public $files = [];
 	public $links = [];
+
+	// Constructor initializes extra_vars to an empty object
+	public function __construct()
+	{
+		$this->extra_vars = new \stdClass();
+	}
 }

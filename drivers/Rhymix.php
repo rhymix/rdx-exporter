@@ -479,7 +479,7 @@ class Rhymix implements DriverInterface
 						{
 							continue;
 						}
-						$info->extra_vars[$key] = $value;
+						$info->extra_vars->{$key} = $value;
 					}
 				}
 
@@ -756,20 +756,20 @@ class Rhymix implements DriverInterface
 							{
 								if (preg_match('/^[\[\{].*[\]\}]$/', $ev->value))
 								{
-									$info->extra_vars[$ev->eid] = @json_decode($ev->value, true) ?: [];
+									$info->extra_vars->{$ev->eid} = @json_decode($ev->value, true) ?: [];
 								}
 								elseif (strpos($ev->value, '|@|') !== false)
 								{
-									$info->extra_vars[$ev->eid] = explode('|@|', $ev->value);
+									$info->extra_vars->{$ev->eid} = explode('|@|', $ev->value);
 								}
 								else
 								{
-									$info->extra_vars[$ev->eid] = [$ev->value];
+									$info->extra_vars->{$ev->eid} = [$ev->value];
 								}
 							}
 							else
 							{
-								$info->extra_vars[$ev->eid] = $ev->value;
+								$info->extra_vars->{$ev->eid} = $ev->value;
 							}
 						}
 					}

@@ -37,11 +37,17 @@ class Member
 	public $signature;
 	public $allow_mailing = 'Y';
 	public $allow_message = 'Y';
-	public $extra_vars = [];
+	public $extra_vars;
 
 	// List of groups
 	public $groups = [];
 
 	// Points
 	public $points = 0;
+
+	// Constructor initializes extra_vars to an empty object
+	public function __construct()
+	{
+		$this->extra_vars = new \stdClass();
+	}
 }

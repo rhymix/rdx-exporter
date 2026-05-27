@@ -21,8 +21,14 @@ class Message
 	// Other properties
 	public $folder = 'Inbox';
 	public $references = [];
-	public $extra_vars = [];
+	public $extra_vars;
 
 	// Files
 	public $files = [];
+
+	// Constructor initializes extra_vars to an empty object
+	public function __construct()
+	{
+		$this->extra_vars = new \stdClass();
+	}
 }

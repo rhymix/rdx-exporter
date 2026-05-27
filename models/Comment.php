@@ -32,8 +32,14 @@ class Comment
 	// Other properties
 	public $notify_message = 'N';
 	public $status = 'PUBLIC';
-	public $extra_vars = [];
+	public $extra_vars;
 
 	// Files
 	public $files = [];
+
+	// Constructor initializes extra_vars to an empty object
+	public function __construct()
+	{
+		$this->extra_vars = new \stdClass();
+	}
 }
