@@ -136,7 +136,7 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 | `signature` | `string` |  |  | 서명 또는 자기소개 (공개) |
 | `allow_mailing` | `string` |  | `Y` | 메일 수신 허용 여부: `Y` 또는 `N` |
 | `allow_message` | `string` |  | `Y` | 쪽지 수신 허용 여부: `Y` 또는 `N` |
-| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `extra_vars` | `object` |  |  | 확장 변수 (key-value pair) |
 | `groups` | `string[]` |  |  | 소속 그룹명 |
 | `points` | `int` |  | 0 | 보유 포인트 |
 
@@ -163,7 +163,7 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 | `ipaddress` | `string` |  |  | IP 주소 |
 | `folder` | `string` | 🗸 | `Inbox` | 폴더: `Inbox` 또는 `Sent` |
 | `references` | `int[]` |  |  | 참조 (다른 메시지를 참고하는 경우, 해당 메시지(들)의 ID값을 담는다) |
-| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `extra_vars` | `object` |  |  | 확장 변수 (key-value pair) |
 | `files` | `File[]` |  |  | 첨부파일 |
 
 - 쪽지에 제목이 없을 수도 있으므로, RDX 아카이브를 처리하는 프로그램은 이를 감안하여야 합니다.
@@ -206,7 +206,7 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 | `title_bold` | `string` |  | `N` | 제목 굵게 여부: `Y` 또는 `N` |
 | `title_color` | `string` |  |  | 제목 색상: `#RRGGBB` |
 | `status` | `string` |  | `PUBLIC` | 상태: `PUBLIC` 또는 `SECRET` |
-| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `extra_vars` | `object` |  |  | 확장 변수 (key-value pair) |
 | `comments` | `Comment[]` |  |  | 댓글 (`Comment` 모델 인스턴스의 목록) |
 | `files` | `File[]` |  |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
 | `links` | `string[]` |  |  | 링크 (확장변수 외에 따로 추가한 경우에 한함) |
@@ -241,7 +241,7 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 | `homepage` | `string` |  |  | 작성자 홈페이지 URL (비회원 글인 경우) |
 | `notify_message` | `string` |  | `N` | 알림 메시지 여부: `Y` 또는 `N` |
 | `status` | `string` |  | `PUBLIC` | 상태: `PUBLIC` 또는 `SECRET` |
-| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `extra_vars` | `object` |  |  | 확장 변수 (key-value pair) |
 | `files` | `File[]` |  |  | 첨부파일 (`File` 모델 인스턴스의 목록) |
 
 - 들여오는 사이트에서 대댓글을 지원하지 않을 수 있습니다.
@@ -269,7 +269,7 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 | `is_valid` | `string` |  | `Y` | 유효 여부: `Y` 또는 `N` |
 | `is_cover_image` | `string` |  | `N` | 대표 이미지 여부: `Y` 또는 `N` |
 | `comment` | `string` |  |  | 관리용 설명 (비공개) |
-| `extra_vars` | `array` |  |  | 확장 변수 (key-value pair) |
+| `extra_vars` | `object` |  |  | 확장 변수 (key-value pair) |
 
 - MIME 타입, 이미지 및 동영상 속성 등을 임의로 입력하기보다는 들여오는 사이트의 판단에 맡기는 것을 권장합니다.
 - 관리용 설명과 확장변수는 들여오는 사이트에서 지원하지 않을 수 있습니다.
