@@ -1,7 +1,8 @@
 RDX Exporter
 ============
 
-이 PHP 스크립트는 Rhymix, XE1, 그누보드 등의 회원 정보와 게시판 데이터를 RDX (Rhymix Data eXchange) 형식으로 내보내는 기능을 제공합니다.
+이 PHP 스크립트는 Rhymix, XE1, XE3, 그누보드, 제로보드, WordPress 등의 회원 정보와 게시판 데이터를
+RDX (Rhymix Data eXchange) 형식으로 내보내는 기능을 제공합니다.
 RDX는 JSON+ZIP 기반의 데이터 교환 형식으로, 한국형 커뮤니티에서 자주 사용되는 데이터 구조를 표현할 수 있도록 설계되어
 기존의 XE 마이그레이션 툴보다 더 안정적인 데이터 이전을 지원합니다.
 
