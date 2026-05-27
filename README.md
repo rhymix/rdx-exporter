@@ -285,9 +285,10 @@ JSONL 파일은 `index.json`에서 명시한 `type`과 일치하는 데이터 �
 - `date`는 `YmdHis` 형식으로 14바이트여야 하며, 해당 형식에 맞는 데이터를 넣을 수 없는 경우 `NULL`을 넣습니다.
   생일 등 특별히 허용되는 속성이 아니라면 8자리 날짜(`Ymd`)만 입력하는 것은 허용하지 않습니다.
 - `Comment`와 `File`은 다른 클래스의 속성으로 들어갈 뿐, 데이터 레코드의 최상위 계층으로 등장하지 않습니다.
-- 확장변수는 key-value pair로 표현된 JSON 객체로, key는 문자열이어야 하며 value는 문자열, 숫자, 불리언, list 또는 `NULL`이 될 수 있습니다.
+- 모든 타입에서 `extra_vars`는 key-value pair로 표현된 JSON 객체로, key는 문자열이어야 하며 value는 문자열, 숫자, 불리언, list 또는 `NULL`이 될 수 있습니다.
   기본적으로 Rhymix에서 array로 취급하는 확장변수는 모두 list로 인코딩합니다.
   nested object 또는 associative array를 value에 넣는 것은 허용하지 않습니다.
+- 확장변수가 없는 경우 `extra_vars`에는 `{}` 또는 `NULL`를 넣을 수 있습니다. 두 값은 동일하게 "확장변수가 없음"이라는 의미로 해석합니다.
 
 ### 첨부파일 처리 방법
 
